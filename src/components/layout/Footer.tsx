@@ -39,7 +39,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="border-t bg-muted/40">
+    <footer className="border-t bg-neutral-50 dark:bg-neutral-900">
       <div className="container py-8 md:py-12">
         {/* 상단: 사이트 정보 + 링크 */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5">
@@ -76,7 +76,7 @@ export function Footer() {
         <Separator className="my-8" />
 
         {/* 투자 면책조항 */}
-        <div className="rounded-lg bg-muted p-4">
+        <div className="rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4">
           <p className="text-xs text-muted-foreground leading-relaxed">
             본 사이트의 정보는 투자 권유가 아니며, 투자 결정과 그에 따른 책임은 투자자 본인에게 있습니다.
             제공되는 정보는 참고용으로만 활용하시기 바랍니다.

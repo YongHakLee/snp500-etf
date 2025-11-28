@@ -69,8 +69,8 @@ export default function WhatIsSP500Page() {
               Standard & Poor&apos;s가 선정한 미국 증시에 상장된 시가총액 상위 500개 대형 기업의
               주가를 시가총액 가중 방식으로 산출한 주가지수입니다.
             </p>
-            <div className="rounded-lg bg-muted/50 p-4">
-              <h4 className="mb-2 font-semibold">주요 연혁</h4>
+            <div className="rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4">
+              <h3 className="mb-2 font-semibold">주요 연혁</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><strong className="text-foreground">1923년:</strong> Standard Statistics Company가 233개 종목으로 첫 지수 발표</li>
                 <li><strong className="text-foreground">1957년:</strong> 500개 종목으로 확대되어 현재의 S&P500 탄생</li>
@@ -97,7 +97,7 @@ export default function WhatIsSP500Page() {
               >
                 <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-green-500" />
                 <div>
-                  <h4 className="font-medium">{criteria.title}</h4>
+                  <h3 className="font-medium">{criteria.title}</h3>
                   <p className="text-sm text-muted-foreground">{criteria.description}</p>
                 </div>
               </div>
@@ -156,7 +156,7 @@ export default function WhatIsSP500Page() {
           <LazySectorChart data={sectors} />
           <div className="mt-6 grid gap-2 text-sm md:grid-cols-2 lg:grid-cols-3">
             {sectors.slice(0, 6).map((sector) => (
-              <div key={sector.sector} className="flex justify-between rounded-lg bg-muted/50 px-3 py-2">
+              <div key={sector.sector} className="flex justify-between rounded-lg bg-neutral-100 dark:bg-neutral-800 px-3 py-2">
                 <span>{sector.sectorKr}</span>
                 <span className="font-medium">{sector.allocation}%</span>
               </div>

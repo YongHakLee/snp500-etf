@@ -365,7 +365,7 @@ export function ExpenseCalculator() {
 
         {/* 비용 차이 비교 */}
         {costSummary.length >= 2 && (
-          <div className="p-4 bg-muted rounded-lg">
+          <div className="p-4 bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg">
             <p className="text-sm font-medium mb-2">보수율 차이로 인한 비용 차이</p>
             <p className="text-xs text-muted-foreground">
               {costSummary[0].ticker} vs {costSummary[1].ticker}: {years}년 후{' '}

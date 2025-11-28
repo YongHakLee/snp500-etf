@@ -62,4 +62,46 @@ IMPLEMENTATION_PLAN.md
 CLAUDE.md
 claudedocs/
 MEMO.md
-.playwright-mcp
+
+# Playwright MCP (browser automation screenshots)
+.playwright-mcp/
+
+# OS generated files
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# Editor directories and files
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.history/
+
+# Package manager lock files (optional - uncomment if not needed)
+# pnpm-lock.yaml
+# yarn.lock
+
+# Storybook (if used)
+storybook-static/
+
+# PWA files
+**/public/sw.js
+**/public/workbox-*.js
+**/public/worker-*.js
+**/public/sw.js.map
+**/public/workbox-*.js.map
+
+# Bundle analyzer
+.next/analyze/
+analyze/
+
+# Sentry
+.sentryclirc
+
+# Temporary files
+*.tmp
+*.temp
+~$*

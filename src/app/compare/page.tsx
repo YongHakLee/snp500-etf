@@ -67,7 +67,7 @@ export default function ComparePage() {
                     {page.features.map((feature) => (
                       <span
                         key={feature}
-                        className="rounded-full bg-muted px-3 py-1 text-xs text-muted-foreground"
+                        className="rounded-full bg-neutral-100 dark:bg-neutral-800 px-3 py-1 text-xs text-muted-foreground"
                       >
                         {feature}
                       </span>
@@ -82,7 +82,7 @@ export default function ComparePage() {
       </div>
 
       {/* 간단한 비교 안내 */}
-      <div className="mt-12 rounded-lg border bg-muted/30 p-6">
+      <div className="mt-12 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 p-6">
         <h2 className="mb-4 text-lg font-semibold">어떤 ETF를 선택해야 할까요?</h2>
         <div className="grid gap-4 md:grid-cols-2">
           <div>

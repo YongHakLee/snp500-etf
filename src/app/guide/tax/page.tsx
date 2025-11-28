@@ -151,7 +151,7 @@ export default function TaxPage() {
           </div>
           <div className="mt-4 grid gap-4 md:grid-cols-2">
             <div className="rounded-lg bg-blue-50 p-4 dark:bg-blue-950">
-              <h4 className="mb-2 font-medium text-blue-900 dark:text-blue-100">해외 ETF 추천 상황</h4>
+              <h3 className="mb-2 font-medium text-blue-900 dark:text-blue-100">해외 ETF 추천 상황</h3>
               <ul className="space-y-1 text-sm text-blue-800 dark:text-blue-200">
                 <li>• 연간 양도차익 250만원 이하 예상</li>
                 <li>• 장기 투자로 복리 효과 극대화</li>
@@ -159,7 +159,7 @@ export default function TaxPage() {
               </ul>
             </div>
             <div className="rounded-lg bg-green-50 p-4 dark:bg-green-950">
-              <h4 className="mb-2 font-medium text-green-900 dark:text-green-100">국내 ETF 추천 상황</h4>
+              <h3 className="mb-2 font-medium text-green-900 dark:text-green-100">국내 ETF 추천 상황</h3>
               <ul className="space-y-1 text-sm text-green-800 dark:text-green-200">
                 <li>• 세금 신고 부담 최소화</li>
                 <li>• ISA/연금 계좌 활용</li>
@@ -175,19 +175,19 @@ export default function TaxPage() {
           description="해외 ETF 매도 시 양도소득세 계산 과정을 알아보세요."
         >
           <div className="rounded-lg border p-6">
-            <h4 className="mb-4 flex items-center gap-2 font-medium">
+            <h3 className="mb-4 flex items-center gap-2 font-medium">
               <Calculator className="h-5 w-5 text-primary" />
               미국 ETF 양도소득세 계산 예시
-            </h4>
+            </h3>
 
             <div className="space-y-4">
               {/* 계산 과정 */}
               <div className="grid gap-3 md:grid-cols-2">
-                <div className="rounded-lg bg-muted/50 p-4">
+                <div className="rounded-lg bg-neutral-100 dark:bg-neutral-800 p-4">
                   <p className="text-sm text-muted-foreground">매수 금액</p>
                   <p className="text-xl font-bold">{taxCalculation.purchasePrice.toLocaleString()}원</p>
                 </div>
-                <div className="rounded-lg bg-muted/50 p-4">
+                <div className="rounded-lg bg-neutral-100 dark:bg-neutral-800 p-4">
                   <p className="text-sm text-muted-foreground">매도 금액</p>
                   <p className="text-xl font-bold">{taxCalculation.salePrice.toLocaleString()}원</p>
                 </div>
@@ -222,7 +222,7 @@ export default function TaxPage() {
               </div>
 
               {/* 계산식 */}
-              <div className="rounded-lg bg-muted/30 p-4">
+              <div className="rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-4">
                 <p className="text-sm font-medium">계산식</p>
                 <p className="mt-1 text-sm text-muted-foreground">
                   (매도금액 - 매수금액 - 기본공제) × 22% = 납부 세금
@@ -270,7 +270,7 @@ export default function TaxPage() {
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <p className="text-sm text-muted-foreground">{strategy.description}</p>
-                    <div className="flex items-start gap-2 rounded-lg bg-muted/50 p-3">
+                    <div className="flex items-start gap-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 p-3">
                       <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-green-500" />
                       <p className="text-sm">
                         <strong>팁:</strong> {strategy.tip}
@@ -290,7 +290,7 @@ export default function TaxPage() {
         >
           <div className="space-y-4">
             <div className="rounded-lg border p-4">
-              <h4 className="mb-3 font-medium">해외 ETF 양도소득세 신고 절차</h4>
+              <h3 className="mb-3 font-medium">해외 ETF 양도소득세 신고 절차</h3>
               <div className="space-y-3">
                 {[
                   { step: 1, title: '신고 기간', content: '매년 5월 1일 ~ 5월 31일 (종합소득세 신고 기간)' },
@@ -312,10 +312,10 @@ export default function TaxPage() {
             </div>
 
             <div className="rounded-lg bg-green-50 p-4 dark:bg-green-950">
-              <h4 className="mb-2 flex items-center gap-2 font-medium text-green-900 dark:text-green-100">
+              <h3 className="mb-2 flex items-center gap-2 font-medium text-green-900 dark:text-green-100">
                 <CheckCircle2 className="h-4 w-4" />
                 국내 상장 ETF는 신고 불필요
-              </h4>
+              </h3>
               <p className="text-sm text-green-800 dark:text-green-200">
                 국내 상장 S&P500 ETF(TIGER, KODEX 등)는 배당소득세가 자동으로 원천징수되어
                 별도의 세금 신고가 필요하지 않습니다.

@@ -120,7 +120,7 @@ export default function StrategyPage() {
           title="적립식 투자 (DCA)"
           description="Dollar Cost Averaging - 일정 금액을 정기적으로 투자하는 전략입니다."
         >
-          <div className="mb-6 rounded-lg bg-primary/5 p-4">
+          <div className="mb-6 rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4">
             <div className="flex items-center gap-2">
               <Calendar className="h-5 w-5 text-primary" />
               <span className="font-medium">적립식 투자 예시</span>
@@ -139,7 +139,7 @@ export default function StrategyPage() {
               >
                 <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-green-500" />
                 <div>
-                  <h4 className="font-medium">{benefit.title}</h4>
+                  <h3 className="font-medium">{benefit.title}</h3>
                   <p className="text-sm text-muted-foreground">{benefit.description}</p>
                 </div>
               </div>
@@ -187,7 +187,7 @@ export default function StrategyPage() {
                       <li>• 심리적 부담 큼</li>
                     </ul>
                   </div>
-                  <div className="rounded-lg bg-muted/50 p-3">
+                  <div className="rounded-lg bg-neutral-100 dark:bg-neutral-800 p-3">
                     <p className="text-sm">
                       <strong>추천:</strong> 목돈 보유자, 장기 투자 확신이 있는 경우
                     </p>
@@ -224,7 +224,7 @@ export default function StrategyPage() {
                       <li>• 정기적 관리 필요</li>
                     </ul>
                   </div>
-                  <div className="rounded-lg bg-muted/50 p-3">
+                  <div className="rounded-lg bg-neutral-100 dark:bg-neutral-800 p-3">
                     <p className="text-sm">
                       <strong>추천:</strong> 초보자, 직장인, 정기 수입이 있는 경우
                     </p>
@@ -277,8 +277,8 @@ export default function StrategyPage() {
             ))}
           </div>
 
-          <div className="mt-6 rounded-lg bg-muted/50 p-4">
-            <h4 className="mb-2 font-medium">예시: 월 수입 300만원</h4>
+          <div className="mt-6 rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4">
+            <h3 className="mb-2 font-medium">예시: 월 수입 300만원</h3>
             <div className="grid gap-2 text-sm md:grid-cols-3">
               <div>필수 지출: <strong>150만원</strong></div>
               <div>선택 지출: <strong>90만원</strong></div>
@@ -292,10 +292,10 @@ export default function StrategyPage() {
           title="리밸런싱"
           description="자산 배분 비율을 원래 목표대로 조정하는 것입니다."
         >
-          <div className="mb-6 flex items-start gap-3 rounded-lg bg-primary/5 p-4">
+          <div className="mb-6 flex items-start gap-3 rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4">
             <RefreshCw className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
             <div>
-              <h4 className="font-medium">리밸런싱이란?</h4>
+              <h3 className="font-medium">리밸런싱이란?</h3>
               <p className="text-sm text-muted-foreground">
                 시간이 지나면 자산별 수익률 차이로 처음 설정한 비율이 달라집니다.
                 예를 들어, 주식 70% : 채권 30%로 시작했는데, 주식이 많이 올라
@@ -305,7 +305,7 @@ export default function StrategyPage() {
           </div>
 
           <div className="mb-6">
-            <h4 className="mb-3 font-medium">리밸런싱 시점</h4>
+            <h3 className="mb-3 font-medium">리밸런싱 시점</h3>
             <div className="grid gap-3 md:grid-cols-2">
               {rebalancingTiming.map((timing, index) => (
                 <div
@@ -322,7 +322,7 @@ export default function StrategyPage() {
           </div>
 
           <div className="rounded-lg border p-4">
-            <h4 className="mb-3 font-medium">리밸런싱 예시</h4>
+            <h3 className="mb-3 font-medium">리밸런싱 예시</h3>
             <Table>
               <TableHeader>
                 <TableRow>

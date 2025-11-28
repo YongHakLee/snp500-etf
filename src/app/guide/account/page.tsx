@@ -188,7 +188,7 @@ export default function AccountPage() {
                   {step.step}
                 </div>
                 <div>
-                  <h4 className="font-medium">{step.title}</h4>
+                  <h3 className="font-medium">{step.title}</h3>
                   <p className="text-sm text-muted-foreground">{step.description}</p>
                 </div>
               </div>
@@ -228,7 +228,7 @@ export default function AccountPage() {
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div>
-                      <h4 className="mb-2 text-sm font-medium text-primary">주요 혜택</h4>
+                      <h3 className="mb-2 text-sm font-medium text-primary">주요 혜택</h3>
                       <ul className="space-y-1">
                         {account.benefits.map((benefit) => (
                           <li key={benefit} className="flex items-start gap-2 text-sm">
@@ -239,7 +239,7 @@ export default function AccountPage() {
                       </ul>
                     </div>
                     <div>
-                      <h4 className="mb-2 text-sm font-medium text-muted-foreground">가입 조건</h4>
+                      <h3 className="mb-2 text-sm font-medium text-muted-foreground">가입 조건</h3>
                       <ul className="space-y-1">
                         {account.conditions.map((condition) => (
                           <li key={condition} className="text-sm text-muted-foreground">
@@ -248,7 +248,7 @@ export default function AccountPage() {
                         ))}
                       </ul>
                     </div>
-                    <div className="rounded-lg bg-muted/50 p-3">
+                    <div className="rounded-lg bg-neutral-100 dark:bg-neutral-800 p-3">
                       <p className="text-sm">
                         <strong>추천:</strong> {account.suitable}
                       </p>

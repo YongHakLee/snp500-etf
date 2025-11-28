@@ -122,8 +122,8 @@ export default function KRETFPage() {
           description="한국 상장 S&P500 ETF의 연간 보수율을 비교합니다."
         >
           <LazyExpenseChart data={chartData} />
-          <div className="mt-4 rounded-lg bg-muted/50 p-4">
-            <h4 className="text-sm font-medium">한국 ETF 보수율 특징</h4>
+          <div className="mt-4 rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4">
+            <h3 className="text-sm font-medium">한국 ETF 보수율 특징</h3>
             <p className="mt-1 text-sm text-muted-foreground">
               한국 상장 ETF는 미국 ETF보다 보수율이 높지만, 세금 혜택(ISA, 연금계좌)을 활용하면
               실질 수익률에서 유리할 수 있습니다. KODEX 시리즈가 가장 낮은 보수율(0.0099%)을 제공합니다.
@@ -140,7 +140,7 @@ export default function KRETFPage() {
             <div className="rounded-lg border p-4">
               <div className="flex items-center gap-2">
                 <Shield className="h-5 w-5 text-blue-500" />
-                <h4 className="font-medium">환헤지 (H)</h4>
+                <h3 className="font-medium">환헤지 (H)</h3>
               </div>
               <p className="mt-2 text-sm text-muted-foreground">
                 환율 변동 위험을 줄여주는 상품입니다. 원/달러 환율이 하락할 것으로 예상될 때 유리합니다.
@@ -166,7 +166,7 @@ export default function KRETFPage() {
             <div className="rounded-lg border p-4">
               <div className="flex items-center gap-2">
                 <RefreshCw className="h-5 w-5 text-green-500" />
-                <h4 className="font-medium">환오픈 (비헤지)</h4>
+                <h3 className="font-medium">환오픈 (비헤지)</h3>
               </div>
               <p className="mt-2 text-sm text-muted-foreground">
                 환율 변동에 그대로 노출됩니다. 장기적으로 원화 약세가 예상될 때 유리합니다.
@@ -205,8 +205,8 @@ export default function KRETFPage() {
           description="배당금을 자동으로 재투자하는 상품입니다."
         >
           <div className="space-y-4">
-            <div className="rounded-lg bg-muted/50 p-4">
-              <h4 className="font-medium">TR 상품의 특징</h4>
+            <div className="rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4">
+              <h3 className="font-medium">TR 상품의 특징</h3>
               <ul className="mt-2 space-y-2 text-sm text-muted-foreground">
                 <li className="flex items-start gap-2">
                   <Check className="mt-0.5 h-4 w-4 shrink-0 text-green-500" />
@@ -230,7 +230,7 @@ export default function KRETFPage() {
               <div className="rounded-lg border p-4">
                 <div className="flex items-center gap-2">
                   <Badge className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">TR</Badge>
-                  <h4 className="font-medium">배당 재투자형</h4>
+                  <h3 className="font-medium">배당 재투자형</h3>
                 </div>
                 <p className="mt-2 text-sm text-muted-foreground">
                   KODEX 미국S&P500TR, TIGER 미국S&P500TR(H)
@@ -242,7 +242,7 @@ export default function KRETFPage() {
               <div className="rounded-lg border p-4">
                 <div className="flex items-center gap-2">
                   <Badge variant="outline">일반</Badge>
-                  <h4 className="font-medium">배당 지급형</h4>
+                  <h3 className="font-medium">배당 지급형</h3>
                 </div>
                 <p className="mt-2 text-sm text-muted-foreground">
                   TIGER 미국S&P500, KODEX 미국S&P500, ACE 미국S&P500

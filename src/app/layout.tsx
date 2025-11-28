@@ -2,10 +2,11 @@ import type { Metadata } from 'next'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import { SITE_CONFIG } from '@/lib/constants'
 import './globals.css'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://yonghaklee.github.io/snp500-etf'),
+  metadataBase: new URL(SITE_CONFIG.baseUrl),
   title: {
     default: '주식초보자를 위한 S&P500 ETF 가이드',
     template: '%s | S&P500 ETF 가이드'

@@ -290,7 +290,7 @@ export default function GlossaryPage() {
         )}
 
         {/* 안내 메시지 */}
-        <div className="rounded-lg border bg-muted/50 p-4 text-sm text-muted-foreground">
+        <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800 p-4 text-sm text-muted-foreground">
           <p>
             ETF 투자에 대해 더 궁금한 점이 있으신가요?{' '}
             <span className="font-medium text-foreground">FAQ</span>에서 자주 묻는 질문을

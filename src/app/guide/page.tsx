@@ -61,7 +61,7 @@ export default function GuidePage() {
       />
 
       {/* 소개 섹션 */}
-      <div className="mb-8 rounded-lg bg-muted/50 p-6">
+      <div className="mb-8 rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-6">
         <h2 className="mb-2 text-lg font-semibold">4단계로 시작하는 S&P500 ETF 투자</h2>
         <p className="text-muted-foreground">
           주식투자가 처음이신가요? 걱정하지 마세요. 아래 4단계를 차근차근 따라오시면

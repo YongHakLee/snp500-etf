@@ -106,8 +106,8 @@ export default function USETFPage() {
           description="ETF별 연간 보수율(Expense Ratio)을 시각적으로 비교합니다. 보수율은 매년 운용 자산에서 차감됩니다."
         >
           <LazyExpenseChart data={chartData} />
-          <div className="mt-4 rounded-lg bg-muted/50 p-4">
-            <h4 className="text-sm font-medium">보수율이 중요한 이유</h4>
+          <div className="mt-4 rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4">
+            <h3 className="text-sm font-medium">보수율이 중요한 이유</h3>
             <p className="mt-1 text-sm text-muted-foreground">
               1억원을 10년간 투자할 경우, 0.03% vs 0.0945% 보수율 차이로 약 65만원 이상의 비용 차이가 발생합니다.
               장기 투자할수록 복리 효과로 이 차이는 더욱 커집니다.
@@ -130,7 +130,7 @@ export default function USETFPage() {
                 >
                   <div className="flex items-center gap-2">
                     <Icon className="h-5 w-5" />
-                    <h4 className="font-medium">{rec.title}</h4>
+                    <h3 className="font-medium">{rec.title}</h3>
                   </div>
                   <p className="mt-2 text-sm font-semibold text-primary">
                     추천: {rec.recommended}
@@ -151,7 +151,7 @@ export default function USETFPage() {
         >
           <div className="space-y-4">
             <div className="rounded-lg border p-4">
-              <h4 className="font-semibold">SPY - SPDR S&P 500 ETF Trust</h4>
+              <h3 className="font-semibold">SPY - SPDR S&P 500 ETF Trust</h3>
               <p className="mt-1 text-sm text-muted-foreground">
                 1993년 출시된 최초의 S&P500 ETF로, 가장 긴 역사와 높은 유동성을 자랑합니다.
                 일일 거래량이 6,000만 주 이상으로 옵션 거래와 단기 매매에 적합합니다.
@@ -159,21 +159,21 @@ export default function USETFPage() {
               </p>
             </div>
             <div className="rounded-lg border p-4">
-              <h4 className="font-semibold">VOO - Vanguard S&P 500 ETF</h4>
+              <h3 className="font-semibold">VOO - Vanguard S&P 500 ETF</h3>
               <p className="mt-1 text-sm text-muted-foreground">
                 Vanguard가 운용하는 대표적인 저비용 ETF입니다. 0.03%의 낮은 보수율로
                 장기 투자자들에게 가장 인기 있습니다. 배당금 자동 재투자 기능을 제공합니다.
               </p>
             </div>
             <div className="rounded-lg border p-4">
-              <h4 className="font-semibold">IVV - iShares Core S&P 500 ETF</h4>
+              <h3 className="font-semibold">IVV - iShares Core S&P 500 ETF</h3>
               <p className="mt-1 text-sm text-muted-foreground">
                 BlackRock이 운용하는 iShares 시리즈의 대표 ETF입니다.
                 VOO와 동일한 0.03% 보수율을 제공하며, 기관 투자자들에게 인기가 높습니다.
               </p>
             </div>
             <div className="rounded-lg border p-4">
-              <h4 className="font-semibold">SPLG - SPDR Portfolio S&P 500 ETF</h4>
+              <h3 className="font-semibold">SPLG - SPDR Portfolio S&P 500 ETF</h3>
               <p className="mt-1 text-sm text-muted-foreground">
                 State Street가 운용하는 저비용 버전 S&P500 ETF입니다.
                 0.02%로 가장 낮은 보수율을 제공하며, 주당 가격이 저렴하여 소액 투자자에게 적합합니다.

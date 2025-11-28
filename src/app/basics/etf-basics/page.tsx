@@ -125,8 +125,8 @@ export default function ETFBasicsPage() {
               <strong className="text-foreground">ETF(Exchange Traded Fund, 상장지수펀드)</strong>는
               특정 지수의 수익률을 추종하도록 설계된 펀드로, 주식처럼 거래소에서 실시간으로 매매할 수 있습니다.
             </p>
-            <div className="rounded-lg bg-muted/50 p-4">
-              <h4 className="mb-2 font-semibold">ETF의 핵심 특징</h4>
+            <div className="rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4">
+              <h3 className="mb-2 font-semibold">ETF의 핵심 특징</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
                   <strong className="text-foreground">지수 추종:</strong> S&P500, KOSPI200 등 특정 지수의 수익률을 그대로 따라갑니다.
@@ -202,14 +202,14 @@ export default function ETFBasicsPage() {
                   <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
                     <Icon className="h-5 w-5 text-primary" />
                   </div>
-                  <h4 className="mb-2 font-semibold">{item.title}</h4>
+                  <h3 className="mb-2 font-semibold">{item.title}</h3>
                   <p className="text-sm text-muted-foreground">{item.description}</p>
                 </div>
               )
             })}
           </div>
           <div className="mt-6 rounded-lg bg-blue-50 p-4 dark:bg-blue-950/30">
-            <h4 className="mb-2 font-semibold text-blue-900 dark:text-blue-100">ETF 가격 형성 원리</h4>
+            <h3 className="mb-2 font-semibold text-blue-900 dark:text-blue-100">ETF 가격 형성 원리</h3>
             <p className="text-sm text-blue-800 dark:text-blue-200">
               ETF 가격은 시장에서의 수요와 공급에 따라 결정되지만, AP의 차익거래 활동 덕분에
               NAV(순자산가치)와 크게 벗어나지 않습니다. 이것이 ETF가 효율적으로 지수를 추종할 수 있는 이유입니다.

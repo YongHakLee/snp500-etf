@@ -137,7 +137,7 @@ export default function FAQPage() {
         </Tabs>
 
         {/* 추가 안내 */}
-        <div className="rounded-lg border bg-muted/50 p-4 text-sm text-muted-foreground">
+        <div className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800 p-4 text-sm text-muted-foreground">
           <p>
             찾으시는 답변이 없으신가요?{' '}
             <span className="font-medium text-foreground">

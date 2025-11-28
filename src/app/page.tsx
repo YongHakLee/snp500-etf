@@ -15,9 +15,9 @@ import type { USEtf, HistoricalReturn } from '@/types'
 const etfs = usEtfData.etfs as USEtf[]
 const returns = historicalData.returns as HistoricalReturn[]
 
-// 최신 수익률 데이터
-const latestReturn = returns[returns.length - 1]
-const previousReturn = returns[returns.length - 2]
+// 최신 수익률 데이터 (안전한 배열 접근)
+const latestReturn = returns.length > 0 ? returns[returns.length - 1] : null
+const previousReturn = returns.length > 1 ? returns[returns.length - 2] : null
 
 // 빠른 비교표용 ETF (SPY, VOO, IVV)
 const quickCompareEtfs = etfs.filter(etf => ['SPY', 'VOO', 'IVV'].includes(etf.ticker))
@@ -58,55 +58,57 @@ export default function HomePage() {
       </section>
 
       {/* Section 2: S&P500 현황 카드 */}
-      <section className="py-12 bg-muted/30">
-        <div className="container">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-xl">S&P500 수익률 현황</CardTitle>
-              <CardDescription>
-                {latestReturn.year}년 기준 | 최근 11년 데이터
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid gap-6 md:grid-cols-2">
-                {/* 수익률 요약 */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="rounded-lg bg-muted/50 p-4">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      {latestReturn.return >= 0 ? (
-                        <TrendingUp className="h-4 w-4 text-green-600" />
-                      ) : (
-                        <TrendingDown className="h-4 w-4 text-red-600" />
-                      )}
-                      연간 수익률
+      {latestReturn && (
+        <section className="py-12 bg-neutral-50 dark:bg-neutral-900 border-y border-neutral-200 dark:border-neutral-800">
+          <div className="container">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-xl">S&P500 수익률 현황</CardTitle>
+                <CardDescription>
+                  {latestReturn.year}년 기준 | 최근 11년 데이터
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid gap-6 md:grid-cols-2">
+                  {/* 수익률 요약 */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        {latestReturn.return >= 0 ? (
+                          <TrendingUp className="h-4 w-4 text-green-600" />
+                        ) : (
+                          <TrendingDown className="h-4 w-4 text-red-600" />
+                        )}
+                        연간 수익률
+                      </div>
+                      <div className={`mt-1 text-2xl font-bold ${latestReturn.return >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                        {latestReturn.return >= 0 ? '+' : ''}{latestReturn.return}%
+                      </div>
+                      <div className="mt-1 text-xs text-muted-foreground">
+                        {latestReturn.year}년
+                      </div>
                     </div>
-                    <div className={`mt-1 text-2xl font-bold ${latestReturn.return >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                      {latestReturn.return >= 0 ? '+' : ''}{latestReturn.return}%
-                    </div>
-                    <div className="mt-1 text-xs text-muted-foreground">
-                      {latestReturn.year}년
+                    <div className="rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <TrendingUp className="h-4 w-4 text-blue-600" />
+                        누적 수익률
+                      </div>
+                      <div className="mt-1 text-2xl font-bold text-blue-600">
+                        +{latestReturn.cumulativeReturn}%
+                      </div>
+                      <div className="mt-1 text-xs text-muted-foreground">
+                        11년간 (2014~{latestReturn.year})
+                      </div>
                     </div>
                   </div>
-                  <div className="rounded-lg bg-muted/50 p-4">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <TrendingUp className="h-4 w-4 text-blue-600" />
-                      누적 수익률
-                    </div>
-                    <div className="mt-1 text-2xl font-bold text-blue-600">
-                      +{latestReturn.cumulativeReturn}%
-                    </div>
-                    <div className="mt-1 text-xs text-muted-foreground">
-                      11년간 (2014~{latestReturn.year})
-                    </div>
-                  </div>
+                  {/* 미니 차트 - Lazy Loading */}
+                  <HistoricalChartSection data={returns} />
                 </div>
-                {/* 미니 차트 - Lazy Loading */}
-                <HistoricalChartSection data={returns} />
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+      )}
 
       {/* Section 3: 주요 섹션 미리보기 */}
       <section className="py-16">
@@ -179,7 +181,7 @@ export default function HomePage() {
       </section>
 
       {/* Section 4: 빠른 비교표 */}
-      <section className="py-12 bg-muted/30">
+      <section className="py-12 bg-neutral-50 dark:bg-neutral-900 border-y border-neutral-200 dark:border-neutral-800">
         <div className="container">
           <div className="mb-8">
             <h2 className="text-2xl font-bold">주요 ETF 비교</h2>

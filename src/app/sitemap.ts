@@ -1,10 +1,9 @@
 import type { MetadataRoute } from 'next'
+import { SITE_CONFIG } from '@/lib/constants'
 
 export const dynamic = 'force-static'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://yonghaklee.github.io/snp500-etf'
-
   const routes = [
     // 메인
     '',
@@ -29,7 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ]
 
   return routes.map((route) => ({
-    url: `${baseUrl}${route}`,
+    url: `${SITE_CONFIG.baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: route === '' ? 1 : route.split('/').length === 2 ? 0.8 : 0.6,
