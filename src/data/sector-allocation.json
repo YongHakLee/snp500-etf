@@ -1,0 +1,59 @@
+{
+  "sectors": [
+    {
+      "sector": "Information Technology",
+      "sectorKr": "정보기술",
+      "allocation": 31.7
+    },
+    {
+      "sector": "Financials",
+      "sectorKr": "금융",
+      "allocation": 13.3
+    },
+    {
+      "sector": "Health Care",
+      "sectorKr": "헬스케어",
+      "allocation": 11.5
+    },
+    {
+      "sector": "Consumer Discretionary",
+      "sectorKr": "임의소비재",
+      "allocation": 10.1
+    },
+    {
+      "sector": "Communication Services",
+      "sectorKr": "커뮤니케이션 서비스",
+      "allocation": 9.0
+    },
+    {
+      "sector": "Industrials",
+      "sectorKr": "산업재",
+      "allocation": 8.3
+    },
+    {
+      "sector": "Consumer Staples",
+      "sectorKr": "필수소비재",
+      "allocation": 5.8
+    },
+    {
+      "sector": "Energy",
+      "sectorKr": "에너지",
+      "allocation": 3.5
+    },
+    {
+      "sector": "Utilities",
+      "sectorKr": "유틸리티",
+      "allocation": 2.4
+    },
+    {
+      "sector": "Real Estate",
+      "sectorKr": "부동산",
+      "allocation": 2.2
+    },
+    {
+      "sector": "Materials",
+      "sectorKr": "소재",
+      "allocation": 2.2
+    }
+  ]
+}

@@ -1,3 +1,88 @@
 {
-  "etfs": []
+  "etfs": [
+    {
+      "ticker": "360750",
+      "name": "TIGER 미국S&P500",
+      "provider": "미래에셋자산운용",
+      "expenseRatio": 0.1774,
+      "aum": 54162,
+      "currency": "KRW",
+      "hedged": false,
+      "totalReturn": false,
+      "dividendFrequency": "분기",
+      "features": ["최대 규모", "분기 배당"]
+    },
+    {
+      "ticker": "379800",
+      "name": "KODEX 미국S&P500TR",
+      "provider": "삼성자산운용",
+      "expenseRatio": 0.0099,
+      "aum": 21500,
+      "currency": "KRW",
+      "hedged": false,
+      "totalReturn": true,
+      "dividendFrequency": "없음",
+      "features": ["최저 보수", "배당 재투자(TR)"]
+    },
+    {
+      "ticker": "360200",
+      "name": "ACE 미국S&P500",
+      "provider": "한국투자신탁운용",
+      "expenseRatio": 0.1550,
+      "aum": 8500,
+      "currency": "KRW",
+      "hedged": false,
+      "totalReturn": false,
+      "dividendFrequency": "분기",
+      "features": ["분기 배당"]
+    },
+    {
+      "ticker": "449170",
+      "name": "TIGER 미국S&P500TR(H)",
+      "provider": "미래에셋자산운용",
+      "expenseRatio": 0.1574,
+      "aum": 3200,
+      "currency": "KRW",
+      "hedged": true,
+      "totalReturn": true,
+      "dividendFrequency": "없음",
+      "features": ["환헤지", "배당 재투자(TR)"]
+    },
+    {
+      "ticker": "433330",
+      "name": "SOL 미국S&P500",
+      "provider": "신한자산운용",
+      "expenseRatio": 0.0500,
+      "aum": 5800,
+      "currency": "KRW",
+      "hedged": false,
+      "totalReturn": false,
+      "dividendFrequency": "분기",
+      "features": ["저보수", "분기 배당"]
+    },
+    {
+      "ticker": "379780",
+      "name": "KODEX 미국S&P500",
+      "provider": "삼성자산운용",
+      "expenseRatio": 0.0099,
+      "aum": 12000,
+      "currency": "KRW",
+      "hedged": false,
+      "totalReturn": false,
+      "dividendFrequency": "분기",
+      "features": ["최저 보수", "분기 배당"]
+    },
+    {
+      "ticker": "360210",
+      "name": "KINDEX 미국S&P500",
+      "provider": "한화자산운용",
+      "expenseRatio": 0.0700,
+      "aum": 2100,
+      "currency": "KRW",
+      "hedged": false,
+      "totalReturn": false,
+      "dividendFrequency": "분기",
+      "features": ["분기 배당"]
+    }
+  ]
 }
