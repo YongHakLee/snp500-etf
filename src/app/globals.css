@@ -128,3 +128,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* 커스텀 컨테이너 스타일 - 가운데 정렬 및 반응형 패딩 */
+@layer utilities {
+  .container {
+    @apply mx-auto w-full px-4 sm:px-6 lg:px-8;
+    max-width: 1280px;
+  }
+}

@@ -12,6 +12,7 @@ interface SectionCardProps {
   description?: string
   children: React.ReactNode
   className?: string
+  headerRight?: React.ReactNode
 }
 
 export function SectionCard({
@@ -19,13 +20,19 @@ export function SectionCard({
   description,
   children,
   className,
+  headerRight,
 }: SectionCardProps) {
   return (
     <Card className={cn(className)}>
-      {(title || description) && (
+      {(title || description || headerRight) && (
         <CardHeader>
-          {title && <CardTitle>{title}</CardTitle>}
-          {description && <CardDescription>{description}</CardDescription>}
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              {title && <CardTitle>{title}</CardTitle>}
+              {description && <CardDescription>{description}</CardDescription>}
+            </div>
+            {headerRight && <div className="flex-shrink-0">{headerRight}</div>}
+          </div>
         </CardHeader>
       )}
       <CardContent>{children}</CardContent>

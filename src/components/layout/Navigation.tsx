@@ -97,7 +97,7 @@ export function Navigation({ className }: NavigationProps) {
           <NavigationMenuItem key={item.href}>
             <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+              <ul className="grid w-[calc(100vw-2rem)] max-w-[400px] gap-3 p-4 md:max-w-[500px] md:grid-cols-2 lg:max-w-[600px]">
                 {item.children.map((child) => (
                   <li key={child.href}>
                     <NavigationMenuLink asChild>

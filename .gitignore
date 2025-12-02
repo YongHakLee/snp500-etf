@@ -33,6 +33,9 @@ yarn-error.log*
 .pnpm-debug.log*
 *.log
 
+# logs directory
+logs/
+
 # env files (can opt-in for committing if needed)
 .env*
 *.local
@@ -58,13 +61,22 @@ next-env.d.ts
 
 # Project documentation (not needed for deployment)
 .claude/
-IMPLEMENTATION_PLAN.md
+IMPLEMENTATION_PLAN*.md
 CLAUDE.md
 claudedocs/
-MEMO.md
+plans/
+scripts/
 
 # Playwright MCP (browser automation screenshots)
 .playwright-mcp/
+
+# Backend
+backend/
+backend/.env
+backend/__pycache__/
+backend/app/__pycache__/
+backend/**/venv/
+backend/**/.venv/
 
 # OS generated files
 .Spotlight-V100

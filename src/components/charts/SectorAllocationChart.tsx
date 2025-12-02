@@ -13,19 +13,19 @@ import { PieChart, Pie, Cell, Sector } from 'recharts'
 import { SectorAllocation } from '@/types'
 import type { PieSectorDataItem } from 'recharts/types/polar/Pie'
 
-// 11개 섹터별 색상 정의
+// 11개 섹터별 색상 정의 (Hex 색상 - SVG 호환)
 const SECTOR_COLORS: Record<string, string> = {
-  'Information Technology': 'hsl(var(--chart-1))',
-  'Financials': 'hsl(var(--chart-2))',
-  'Health Care': 'hsl(var(--chart-3))',
-  'Consumer Discretionary': 'hsl(var(--chart-4))',
-  'Communication Services': 'hsl(var(--chart-5))',
-  'Industrials': 'hsl(221, 83%, 53%)',
-  'Consumer Staples': 'hsl(142, 71%, 45%)',
-  'Energy': 'hsl(25, 95%, 53%)',
-  'Utilities': 'hsl(262, 83%, 58%)',
-  'Real Estate': 'hsl(339, 90%, 51%)',
-  'Materials': 'hsl(173, 80%, 40%)',
+  'Information Technology': '#3B82F6',  // Blue
+  'Financials': '#10B981',              // Emerald
+  'Health Care': '#EC4899',             // Pink
+  'Consumer Discretionary': '#F59E0B',  // Amber
+  'Communication Services': '#8B5CF6',  // Violet
+  'Industrials': '#6366F1',             // Indigo
+  'Consumer Staples': '#14B8A6',        // Teal
+  'Energy': '#F97316',                  // Orange
+  'Utilities': '#A855F7',               // Purple
+  'Real Estate': '#EF4444',             // Red
+  'Materials': '#06B6D4',               // Cyan
 }
 
 // 섹터별 chartConfig 생성
@@ -39,7 +39,7 @@ const createChartConfig = (data: SectorAllocation[]): ChartConfig => {
   data.forEach((item) => {
     config[item.sector] = {
       label: item.sectorKr,
-      color: SECTOR_COLORS[item.sector] || 'hsl(var(--chart-1))',
+      color: SECTOR_COLORS[item.sector] || '#94A3B8',  // Slate fallback
     }
   })
 
@@ -96,7 +96,7 @@ export function SectorAllocationChart({ data }: SectorAllocationChartProps) {
           {data.map((entry, index) => (
             <Cell
               key={`cell-${index}`}
-              fill={SECTOR_COLORS[entry.sector] || 'hsl(var(--chart-1))'}
+              fill={SECTOR_COLORS[entry.sector] || '#94A3B8'}
             />
           ))}
         </Pie>

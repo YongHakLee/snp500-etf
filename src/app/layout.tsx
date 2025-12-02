@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
+import { SWRProvider } from '@/components/providers/SWRProvider'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { SITE_CONFIG } from '@/lib/constants'
@@ -54,18 +55,20 @@ export default function RootLayout({
     <html lang="ko" suppressHydrationWarning>
       <body className="font-sans antialiased">
         <ThemeProvider>
-          {/* Skip to main content 링크 - 키보드 접근성 */}
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-background focus:text-foreground focus:border focus:rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
-          >
-            본문으로 건너뛰기
-          </a>
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <main id="main-content" className="flex-1">{children}</main>
-            <Footer />
-          </div>
+          <SWRProvider>
+            {/* Skip to main content 링크 - 키보드 접근성 */}
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-background focus:text-foreground focus:border focus:rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
+            >
+              본문으로 건너뛰기
+            </a>
+            <div className="flex min-h-screen flex-col">
+              <Header />
+              <main id="main-content" className="flex-1">{children}</main>
+              <Footer />
+            </div>
+          </SWRProvider>
         </ThemeProvider>
       </body>
     </html>

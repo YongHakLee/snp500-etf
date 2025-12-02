@@ -1,7 +1,7 @@
-import Link from 'next/link'
-import { Navigation } from './Navigation'
-import { MobileNav } from './MobileNav'
-import { ThemeToggle } from '@/components/common/ThemeToggle'
+import Link from "next/link";
+import { Navigation } from "./Navigation";
+import { MobileNav } from "./MobileNav";
+import { ThemeToggle } from "@/components/common/ThemeToggle";
 
 export function Header() {
   return (
@@ -10,7 +10,7 @@ export function Header() {
         <div className="flex items-center gap-4">
           <MobileNav />
           <Link href="/" className="flex items-center space-x-2">
-            <span className="font-bold text-xl">S&P500 ETF</span>
+            <span className="font-bold text-xl">S&P500 ETF 가이드</span>
           </Link>
         </div>
 
@@ -19,5 +19,5 @@ export function Header() {
         <ThemeToggle />
       </div>
     </header>
-  )
+  );
 }

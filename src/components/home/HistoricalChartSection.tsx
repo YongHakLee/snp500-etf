@@ -8,7 +8,7 @@ import type { HistoricalReturn } from '@/types'
 const HistoricalReturnChart = dynamic(
   () => import('@/components/charts/HistoricalReturnChart').then(mod => ({ default: mod.HistoricalReturnChart })),
   {
-    loading: () => <Skeleton className="h-[200px] w-full" />,
+    loading: () => <Skeleton className="h-[180px] w-full sm:h-[200px]" />,
     ssr: false
   }
 )
@@ -19,7 +19,7 @@ interface Props {
 
 export function HistoricalChartSection({ data }: Props) {
   return (
-    <div className="h-[200px]">
+    <div className="h-[250px] sm:h-[300px]">
       <HistoricalReturnChart data={data} />
     </div>
   )

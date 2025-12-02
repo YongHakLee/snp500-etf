@@ -22,7 +22,7 @@ interface Props {
 export function HistoricalReturnChart({ data }: Props) {
   return (
     <div role="img" aria-label="S&P500 역사적 수익률 차트: 연간 수익률과 누적 수익률을 선 그래프로 표시합니다.">
-      <ChartContainer config={chartConfig} className="h-[300px] w-full">
+      <ChartContainer config={chartConfig} className="h-[250px] w-full sm:h-[300px]">
         <LineChart data={data}>
         <CartesianGrid vertical={false} />
         <XAxis dataKey="year" tickLine={false} axisLine={false} />
