@@ -1,73 +1,105 @@
-'use client'
+"use client";
 
-import { useState, useMemo } from 'react'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { HistoricalChartSection } from '@/components/home/HistoricalChartSection'
-import { DataStatus } from '@/components/common/DataStatus'
-import { TimeRangeSelector, type TimeRange } from '@/components/common/TimeRangeSelector'
-import { BookOpen, BarChart3, Compass, ArrowRight, ChevronRight } from 'lucide-react'
+import { useState, useMemo } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  CardAction,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { HistoricalChartSection } from "@/components/home/HistoricalChartSection";
+import { QuickNavigation } from "@/components/home/QuickNavigation";
+import { DataStatus } from "@/components/common/DataStatus";
+import {
+  TimeRangeSelector,
+  type TimeRange,
+} from "@/components/common/TimeRangeSelector";
+import {
+  BookOpen,
+  BarChart3,
+  Compass,
+  ArrowRight,
+  ChevronRight,
+} from "lucide-react";
 
-import { useUSEtfs, useHistoricalReturns } from '@/hooks'
+import { useUSEtfs, useHistoricalReturns } from "@/hooks";
 
 // 무엇을 알아볼까요? 섹션 데이터
 const sections = [
   {
-    value: 'basics',
-    title: 'S&P500 기초 지식',
-    href: '/basics',
+    value: "basics",
+    title: "S&P500 기초 지식",
+    href: "/basics",
     icon: BookOpen,
-    description: 'S&P500 지수와 ETF의 기초를 배워보세요.',
+    description: "S&P500 지수와 ETF의 기초를 배워보세요.",
     items: [
-      { label: 'S&P500이란?', href: '/basics/what-is-sp500' },
-      { label: 'ETF 기초', href: '/basics/etf-basics' },
-      { label: '왜 투자하나?', href: '/basics/why-invest' },
-    ]
+      { label: "S&P500이란?", href: "/basics/what-is-sp500" },
+      { label: "ETF 기초", href: "/basics/etf-basics" },
+      { label: "왜 투자하나?", href: "/basics/why-invest" },
+    ],
   },
   {
-    value: 'compare',
-    title: 'ETF 비교 분석',
-    href: '/compare',
+    value: "compare",
+    title: "ETF 비교 분석",
+    href: "/compare",
     icon: BarChart3,
-    description: '주요 ETF를 비교하고 나에게 맞는 상품을 찾아보세요.',
+    description: "주요 ETF를 비교하고 나에게 맞는 상품을 찾아보세요.",
     items: [
-      { label: '미국 ETF 비교', href: '/compare/us-etf' },
-      { label: '한국 ETF 비교', href: '/compare/kr-etf' },
-    ]
+      { label: "미국 ETF", href: "/compare/us-etf" },
+      { label: "한국 ETF", href: "/compare/kr-etf" },
+    ],
   },
   {
-    value: 'guide',
-    title: '투자 가이드',
-    href: '/guide',
+    value: "guide",
+    title: "투자 가이드",
+    href: "/guide",
     icon: Compass,
-    description: '계좌 개설부터 첫 매수까지 단계별로 안내합니다.',
+    description: "계좌 개설부터 첫 매수까지 단계별로 안내합니다.",
     items: [
-      { label: '계좌 개설', href: '/guide/account' },
-      { label: '첫 매수', href: '/guide/first-buy' },
-      { label: '투자 전략', href: '/guide/strategy' },
-      { label: '세금 안내', href: '/guide/tax' },
-    ]
+      { label: "계좌 개설", href: "/guide/account" },
+      { label: "첫 매수", href: "/guide/first-buy" },
+      { label: "투자 전략", href: "/guide/strategy" },
+      { label: "세금 안내", href: "/guide/tax" },
+    ],
   },
-]
+];
 
 export default function HomePage() {
   // 기간 선택 상태 (기본값: 10년)
-  const [timeRange, setTimeRange] = useState<TimeRange>('10y')
+  const [timeRange, setTimeRange] = useState<TimeRange>("10y");
 
   // 커스텀 훅으로 데이터 가져오기
-  const { etfs, isLive: isEtfLive, lastUpdated: etfLastUpdated } = useUSEtfs()
-  const { returns, summary, isLive: isReturnsLive, lastUpdated: returnsLastUpdated } = useHistoricalReturns(timeRange)
+  const { etfs, isLive: isEtfLive, lastUpdated: etfLastUpdated } = useUSEtfs();
+  const {
+    returns,
+    summary,
+    isLive: isReturnsLive,
+    lastUpdated: returnsLastUpdated,
+  } = useHistoricalReturns(timeRange);
 
   // 계산된 값들
   const { latestReturn, quickCompareEtfs } = useMemo(() => {
-    const latestReturn = returns.length > 0 ? returns[returns.length - 1] : null
-    const quickCompareEtfs = etfs.filter(etf => ['SPY', 'VOO', 'IVV'].includes(etf.ticker))
+    const latestReturn =
+      returns.length > 0 ? returns[returns.length - 1] : null;
+    const quickCompareEtfs = etfs.filter((etf) =>
+      ["SPY", "VOO", "IVV"].includes(etf.ticker)
+    );
 
-    return { latestReturn, quickCompareEtfs }
-  }, [etfs, returns])
+    return { latestReturn, quickCompareEtfs };
+  }, [etfs, returns]);
 
   return (
     <div className="flex flex-col">
@@ -92,32 +124,60 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Quick Navigation 바 */}
+      <QuickNavigation />
+
       {/* Section 2: 무엇을 알아볼까요? (카드 그리드) */}
       <section className="py-10 md:py-16">
         <div className="container">
           <div className="mb-8 text-center md:mb-10">
-            <h2 className="text-2xl font-bold md:text-3xl">무엇을 알아볼까요?</h2>
+            <h2 className="text-2xl font-bold md:text-3xl">
+              무엇을 알아볼까요?
+            </h2>
             <p className="mt-2 text-muted-foreground">
               S&P500 ETF 투자에 필요한 모든 정보를 한 곳에서
             </p>
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {sections.map((section) => {
-              const Icon = section.icon
+              const Icon = section.icon;
               return (
-                <Card key={section.value} className="group hover:shadow-lg transition-shadow">
+                <Card
+                  key={section.value}
+                  className="group hover:shadow-lg hover:border-primary/50 hover:scale-[1.02] transition-all duration-200"
+                >
                   <CardHeader className="pb-4">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                         <Icon className="h-5 w-5" />
                       </div>
                       <div>
-                        <Link href={section.href} className="hover:text-primary transition-colors">
-                          <CardTitle className="text-lg">{section.title}</CardTitle>
+                        <Link
+                          href={section.href}
+                          className="hover:text-primary transition-colors"
+                        >
+                          <CardTitle className="text-lg">
+                            {section.title}
+                          </CardTitle>
                         </Link>
-                        <CardDescription className="text-sm">{section.description}</CardDescription>
+                        <CardDescription className="text-sm">
+                          {section.description}
+                        </CardDescription>
                       </div>
                     </div>
+                    <CardAction>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        asChild
+                        className="text-primary hover:text-primary"
+                      >
+                        <Link href={section.href}>
+                          시작하기
+                          <ArrowRight className="ml-1 h-4 w-4" />
+                        </Link>
+                      </Button>
+                    </CardAction>
                   </CardHeader>
                   <CardContent className="pt-0">
                     <ul className="space-y-1">
@@ -135,7 +195,7 @@ export default function HomePage() {
                     </ul>
                   </CardContent>
                 </Card>
-              )
+              );
             })}
           </div>
         </div>
@@ -149,14 +209,22 @@ export default function HomePage() {
               <CardHeader>
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                   <div>
-                    <CardTitle className="text-xl">S&P500 장기 수익률</CardTitle>
+                    <CardTitle className="text-xl">
+                      S&P500 장기 수익률
+                    </CardTitle>
                     <CardDescription>
                       지난 {summary.totalYears}년간 S&P500의 연간 및 누적 수익률
                     </CardDescription>
                   </div>
                   <div className="flex items-center gap-3">
-                    <TimeRangeSelector value={timeRange} onChange={setTimeRange} />
-                    <DataStatus isLive={isReturnsLive} lastUpdated={returnsLastUpdated} />
+                    <TimeRangeSelector
+                      value={timeRange}
+                      onChange={setTimeRange}
+                    />
+                    <DataStatus
+                      isLive={isReturnsLive}
+                      lastUpdated={returnsLastUpdated}
+                    />
                   </div>
                 </div>
               </CardHeader>
@@ -168,36 +236,69 @@ export default function HomePage() {
                 {/* 4개 통계 카드 (why-invest 스타일) */}
                 <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
                   <div className="rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4 text-center">
-                    <p className="text-sm text-muted-foreground">최근 연간 수익률</p>
-                    <p className={`text-2xl font-bold ${latestReturn.return >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                      {latestReturn.return >= 0 ? '+' : ''}{latestReturn.return}%
+                    <p className="text-sm text-muted-foreground">
+                      최근 연간 수익률
                     </p>
-                    <p className="text-xs text-muted-foreground">{latestReturn.year}년</p>
+                    <p
+                      className={`text-2xl font-bold ${
+                        latestReturn.return >= 0
+                          ? "text-green-600"
+                          : "text-red-600"
+                      }`}
+                    >
+                      {latestReturn.return >= 0 ? "+" : ""}
+                      {latestReturn.return}%
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {latestReturn.year}년
+                    </p>
                   </div>
                   <div className="rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4 text-center">
                     <p className="text-sm text-muted-foreground">누적 수익률</p>
-                    <p className="text-2xl font-bold text-primary">+{latestReturn.cumulativeReturn.toFixed(1)}%</p>
-                    <p className="text-xs text-muted-foreground">{returns[0]?.year}년 이후</p>
+                    <p className="text-2xl font-bold text-primary">
+                      +{latestReturn.cumulativeReturn.toFixed(1)}%
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {returns[0]?.year}년 이후
+                    </p>
                   </div>
                   <div className="rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4 text-center">
-                    <p className="text-sm text-muted-foreground">평균 연간 수익률</p>
-                    <p className="text-2xl font-bold">+{summary.avgAnnualReturn}%</p>
-                    <p className="text-xs text-muted-foreground">{summary.totalYears}년 평균</p>
+                    <p className="text-sm text-muted-foreground">
+                      평균 연간 수익률
+                    </p>
+                    <p className="text-2xl font-bold">
+                      +{summary.avgAnnualReturn}%
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {summary.totalYears}년 평균
+                    </p>
                   </div>
                   <div className="rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4 text-center">
-                    <p className="text-sm text-muted-foreground">수익 발생 연도</p>
-                    <p className="text-2xl font-bold">{summary.positiveYears}/{summary.totalYears}년</p>
-                    <p className="text-xs text-muted-foreground">{((summary.positiveYears / summary.totalYears) * 100).toFixed(0)}% 확률</p>
+                    <p className="text-sm text-muted-foreground">
+                      수익 발생 연도
+                    </p>
+                    <p className="text-2xl font-bold">
+                      {summary.positiveYears}/{summary.totalYears}년
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {(
+                        (summary.positiveYears / summary.totalYears) *
+                        100
+                      ).toFixed(0)}
+                      % 확률
+                    </p>
                   </div>
                 </div>
                 {/* 최고/최저 연도 표시 */}
                 {summary.bestYear && summary.worstYear && (
                   <div className="mt-4 flex flex-wrap gap-4 justify-center text-sm">
                     <span className="text-green-600">
-                      최고: {summary.bestYear.year}년 (+{summary.bestYear.return}%)
+                      최고: {summary.bestYear.year}년 (+
+                      {summary.bestYear.return}%)
                     </span>
                     <span className="text-red-600">
-                      최저: {summary.worstYear.year}년 ({summary.worstYear.return}%)
+                      최저: {summary.worstYear.year}년 (
+                      {summary.worstYear.return}%)
                     </span>
                   </div>
                 )}
@@ -220,7 +321,11 @@ export default function HomePage() {
                 가장 인기 있는 S&P500 ETF 3종 비교
               </p>
             </div>
-            <DataStatus isLive={isEtfLive} lastUpdated={etfLastUpdated} className="hidden md:flex" />
+            <DataStatus
+              isLive={isEtfLive}
+              lastUpdated={etfLastUpdated}
+              className="hidden md:flex"
+            />
           </div>
 
           {/* 데스크톱: 테이블 */}
@@ -242,7 +347,7 @@ export default function HomePage() {
                       <TableCell className="font-bold">{etf.ticker}</TableCell>
                       <TableCell>{etf.provider}</TableCell>
                       <TableCell className="text-right">
-                        {etf.expenseRatio.toFixed(2)}%
+                        {etf.expenseRatio.toFixed(4)}%
                       </TableCell>
                       <TableCell className="text-right text-green-600">
                         +{etf.return5Y}%
@@ -267,7 +372,11 @@ export default function HomePage() {
 
           {/* 모바일: 카드 레이아웃 */}
           <div className="space-y-4 md:hidden">
-            <DataStatus isLive={isEtfLive} lastUpdated={etfLastUpdated} className="mb-4" />
+            <DataStatus
+              isLive={isEtfLive}
+              lastUpdated={etfLastUpdated}
+              className="mb-4"
+            />
             {quickCompareEtfs.map((etf) => (
               <Card key={etf.ticker}>
                 <CardHeader className="pb-2">
@@ -282,11 +391,15 @@ export default function HomePage() {
                 <CardContent className="grid grid-cols-2 gap-2 text-sm">
                   <div>
                     <span className="text-muted-foreground">보수율: </span>
-                    <span className="font-medium">{etf.expenseRatio.toFixed(2)}%</span>
+                    <span className="font-medium">
+                      {etf.expenseRatio.toFixed(4)}%
+                    </span>
                   </div>
                   <div>
                     <span className="text-muted-foreground">5년 수익률: </span>
-                    <span className="font-medium text-green-600">+{etf.return5Y}%</span>
+                    <span className="font-medium text-green-600">
+                      +{etf.return5Y}%
+                    </span>
                   </div>
                   <div className="col-span-2">
                     <span className="text-muted-foreground">추천 대상: </span>
@@ -307,5 +420,5 @@ export default function HomePage() {
         </div>
       </section>
     </div>
-  )
+  );
 }

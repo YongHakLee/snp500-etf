@@ -3,6 +3,7 @@ import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import { SWRProvider } from '@/components/providers/SWRProvider'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import { BottomTabBar } from '@/components/layout/BottomTabBar'
 import { SITE_CONFIG } from '@/lib/constants'
 import './globals.css'
 
@@ -65,8 +66,9 @@ export default function RootLayout({
             </a>
             <div className="flex min-h-screen flex-col">
               <Header />
-              <main id="main-content" className="flex-1">{children}</main>
+              <main id="main-content" className="flex-1 pb-16 md:pb-0">{children}</main>
               <Footer />
+              <BottomTabBar />
             </div>
           </SWRProvider>
         </ThemeProvider>

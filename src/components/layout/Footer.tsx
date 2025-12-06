@@ -39,7 +39,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="border-t bg-neutral-50 dark:bg-neutral-900">
+    <footer className="border-t bg-neutral-50 dark:bg-neutral-900 mb-16 md:mb-0">
       <div className="container py-8 md:py-12">
         {/* 상단: 사이트 정보 + 링크 */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5">

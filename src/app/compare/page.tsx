@@ -1,6 +1,6 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import { PageHeader } from '@/components/common/PageHeader'
+import type { Metadata } from "next";
+import Link from "next/link";
+import { PageHeader } from "@/components/common/PageHeader";
 
 import {
   Card,
@@ -8,34 +8,37 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-} from '@/components/ui/card'
-import { DollarSign, Building2, ArrowRight } from 'lucide-react'
+} from "@/components/ui/card";
+import { DollarSign, Building2, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: 'ETF 비교',
-  description: '미국 및 한국 상장 S&P500 ETF를 한눈에 비교하세요. SPY, VOO, IVV, TIGER, KODEX 등.',
+  title: "ETF 비교",
+  description:
+    "미국 및 한국 상장 S&P500 ETF를 한눈에 비교하세요. SPY, VOO, IVV, TIGER, KODEX 등.",
   openGraph: {
-    title: 'S&P500 ETF 비교',
-    description: '미국 및 한국 상장 S&P500 ETF 비교.',
+    title: "S&P500 ETF 비교",
+    description: "미국 및 한국 상장 S&P500 ETF 비교.",
   },
-}
+};
 
 const comparePages = [
   {
-    title: '미국 ETF 비교',
-    description: 'SPY, VOO, IVV, SPLG 등 미국 상장 S&P500 ETF를 보수율, 거래량, 수익률 기준으로 비교합니다.',
-    href: '/compare/us-etf',
+    title: "미국 ETF",
+    description:
+      "SPY, VOO, IVV, SPLG 등 미국 상장 S&P500 ETF를 보수율, 거래량, 수익률 기준으로 비교합니다.",
+    href: "/compare/us-etf",
     icon: DollarSign,
-    features: ['낮은 보수율', '높은 유동성', '달러 자산'],
+    features: ["낮은 보수율", "높은 유동성", "달러 자산"],
   },
   {
-    title: '한국 ETF 비교',
-    description: 'TIGER, KODEX, ACE 등 한국 상장 S&P500 ETF를 환헤지 여부, TR 상품, 세금 측면에서 비교합니다.',
-    href: '/compare/kr-etf',
+    title: "한국 ETF",
+    description:
+      "TIGER, KODEX, ACE 등 한국 상장 S&P500 ETF를 환헤지 여부, TR 상품, 세금 측면에서 비교합니다.",
+    href: "/compare/kr-etf",
     icon: Building2,
-    features: ['원화 거래', '세금 혜택', '환헤지 선택'],
+    features: ["원화 거래", "세금 혜택", "환헤지 선택"],
   },
-]
+];
 
 export default function ComparePage() {
   return (
@@ -43,12 +46,12 @@ export default function ComparePage() {
       <PageHeader
         title="ETF 비교"
         description="다양한 S&P500 ETF를 비교하여 나에게 맞는 상품을 찾아보세요. 미국 직접 투자와 한국 상장 ETF 중 어떤 것이 적합한지 확인할 수 있습니다."
-        breadcrumbs={[{ label: 'ETF 비교', href: '/compare' }]}
+        breadcrumbs={[{ label: "ETF 비교", href: "/compare" }]}
       />
 
       <div className="grid gap-6 md:grid-cols-2">
         {comparePages.map((page) => {
-          const Icon = page.icon
+          const Icon = page.icon;
           return (
             <Link key={page.href} href={page.href} className="group">
               <Card className="h-full transition-colors hover:border-primary">
@@ -73,17 +76,21 @@ export default function ComparePage() {
                       </span>
                     ))}
                   </div>
-                  <span className="mt-4 block text-sm text-primary">자세히 보기</span>
+                  <span className="mt-4 block text-sm text-primary">
+                    자세히 보기
+                  </span>
                 </CardContent>
               </Card>
             </Link>
-          )
+          );
         })}
       </div>
 
       {/* 간단한 비교 안내 */}
       <div className="mt-12 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 p-6">
-        <h2 className="mb-4 text-lg font-semibold">어떤 ETF를 선택해야 할까요?</h2>
+        <h2 className="mb-4 text-lg font-semibold">
+          어떤 ETF를 선택해야 할까요?
+        </h2>
         <div className="grid gap-4 md:grid-cols-2">
           <div>
             <h3 className="font-medium text-primary">미국 ETF 추천 대상</h3>
@@ -106,5 +113,5 @@ export default function ComparePage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

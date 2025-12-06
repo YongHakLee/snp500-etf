@@ -7,6 +7,11 @@ import type { KREtf } from '@/types'
 
 const fallbackData = krEtfData.etfs as KREtf[]
 
+// 정적 데이터에서 actualExpenseRatio 맵 생성 (API 데이터 보충용)
+const actualExpenseRatioMap = new Map(
+  fallbackData.map(etf => [etf.ticker, etf.actualExpenseRatio])
+)
+
 interface UseKREtfsReturn {
   etfs: KREtf[]
   isLive: boolean
@@ -33,7 +38,12 @@ export function useKREtfs(): UseKREtfsReturn {
 
   // API 응답은 배열 형태 (List[KRETFSchema])
   // API 성공 시 data 배열 사용, 실패 시 fallbackData 사용
-  const etfs = (Array.isArray(data) && data.length > 0) ? data : fallbackData
+  // API 데이터에 actualExpenseRatio가 없으면 정적 데이터에서 보충
+  const rawEtfs = (Array.isArray(data) && data.length > 0) ? data : fallbackData
+  const etfs = rawEtfs.map(etf => ({
+    ...etf,
+    actualExpenseRatio: etf.actualExpenseRatio ?? actualExpenseRatioMap.get(etf.ticker),
+  }))
 
   // isLive 판단: 첫 번째 ETF의 isLive 필드 확인 (API 응답에 포함됨)
   const isLive = Boolean(

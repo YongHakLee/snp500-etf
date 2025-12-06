@@ -7,7 +7,7 @@ import useSWR from 'swr'
 import { swrFetcher } from '@/lib/api'
 import type { SectorRepresentative, SectorRepresentativesResponse } from '@/types'
 
-// 정적 폴백 데이터 (API 실패 시 사용)
+// 정적 폴백 데이터 (API 실패 시 사용) - 11개 섹터 전체
 const FALLBACK_SECTORS: SectorRepresentative[] = [
   {
     sector: 'Information Technology',
@@ -20,6 +20,19 @@ const FALLBACK_SECTORS: SectorRepresentative[] = [
       { symbol: 'NVDA', name: 'NVIDIA Corporation', industry: 'Semiconductors' },
       { symbol: 'AVGO', name: 'Broadcom Inc.', industry: 'Semiconductors' },
       { symbol: 'ORCL', name: 'Oracle Corporation', industry: 'Software' },
+    ],
+  },
+  {
+    sector: 'Industrials',
+    sectorKr: '산업재',
+    color: '#6366F1',
+    totalCount: 78,
+    stocks: [
+      { symbol: 'CAT', name: 'Caterpillar Inc.', industry: 'Construction Machinery' },
+      { symbol: 'RTX', name: 'RTX Corporation', industry: 'Aerospace & Defense' },
+      { symbol: 'HON', name: 'Honeywell International Inc.', industry: 'Industrial Conglomerates' },
+      { symbol: 'UNP', name: 'Union Pacific Corporation', industry: 'Railroads' },
+      { symbol: 'DE', name: 'Deere & Company', industry: 'Farm & Heavy Machinery' },
     ],
   },
   {
@@ -46,6 +59,97 @@ const FALLBACK_SECTORS: SectorRepresentative[] = [
       { symbol: 'JNJ', name: 'Johnson & Johnson', industry: 'Drug Manufacturers' },
       { symbol: 'ABBV', name: 'AbbVie Inc.', industry: 'Drug Manufacturers' },
       { symbol: 'MRK', name: 'Merck & Co., Inc.', industry: 'Drug Manufacturers' },
+    ],
+  },
+  {
+    sector: 'Consumer Discretionary',
+    sectorKr: '임의소비재',
+    color: '#F59E0B',
+    totalCount: 53,
+    stocks: [
+      { symbol: 'AMZN', name: 'Amazon.com Inc.', industry: 'Internet Retail' },
+      { symbol: 'TSLA', name: 'Tesla Inc.', industry: 'Auto Manufacturers' },
+      { symbol: 'HD', name: 'The Home Depot Inc.', industry: 'Home Improvement Retail' },
+      { symbol: 'MCD', name: "McDonald's Corporation", industry: 'Restaurants' },
+      { symbol: 'NKE', name: 'Nike Inc.', industry: 'Footwear & Accessories' },
+    ],
+  },
+  {
+    sector: 'Consumer Staples',
+    sectorKr: '필수소비재',
+    color: '#14B8A6',
+    totalCount: 38,
+    stocks: [
+      { symbol: 'PG', name: 'Procter & Gamble Co.', industry: 'Household Products' },
+      { symbol: 'KO', name: 'The Coca-Cola Company', industry: 'Beverages' },
+      { symbol: 'PEP', name: 'PepsiCo Inc.', industry: 'Beverages' },
+      { symbol: 'COST', name: 'Costco Wholesale Corporation', industry: 'Discount Stores' },
+      { symbol: 'WMT', name: 'Walmart Inc.', industry: 'Discount Stores' },
+    ],
+  },
+  {
+    sector: 'Real Estate',
+    sectorKr: '부동산',
+    color: '#EF4444',
+    totalCount: 31,
+    stocks: [
+      { symbol: 'PLD', name: 'Prologis Inc.', industry: 'REIT - Industrial' },
+      { symbol: 'AMT', name: 'American Tower Corporation', industry: 'REIT - Specialty' },
+      { symbol: 'EQIX', name: 'Equinix Inc.', industry: 'REIT - Specialty' },
+      { symbol: 'SPG', name: 'Simon Property Group Inc.', industry: 'REIT - Retail' },
+      { symbol: 'O', name: 'Realty Income Corporation', industry: 'REIT - Retail' },
+    ],
+  },
+  {
+    sector: 'Utilities',
+    sectorKr: '유틸리티',
+    color: '#A855F7',
+    totalCount: 31,
+    stocks: [
+      { symbol: 'NEE', name: 'NextEra Energy Inc.', industry: 'Utilities - Regulated Electric' },
+      { symbol: 'DUK', name: 'Duke Energy Corporation', industry: 'Utilities - Regulated Electric' },
+      { symbol: 'SO', name: 'The Southern Company', industry: 'Utilities - Regulated Electric' },
+      { symbol: 'D', name: 'Dominion Energy Inc.', industry: 'Utilities - Regulated Electric' },
+      { symbol: 'AEP', name: 'American Electric Power Company', industry: 'Utilities - Regulated Electric' },
+    ],
+  },
+  {
+    sector: 'Materials',
+    sectorKr: '소재',
+    color: '#06B6D4',
+    totalCount: 26,
+    stocks: [
+      { symbol: 'LIN', name: 'Linde plc', industry: 'Specialty Chemicals' },
+      { symbol: 'APD', name: 'Air Products and Chemicals Inc.', industry: 'Specialty Chemicals' },
+      { symbol: 'SHW', name: 'The Sherwin-Williams Company', industry: 'Specialty Chemicals' },
+      { symbol: 'ECL', name: 'Ecolab Inc.', industry: 'Specialty Chemicals' },
+      { symbol: 'FCX', name: 'Freeport-McMoRan Inc.', industry: 'Copper' },
+    ],
+  },
+  {
+    sector: 'Communication Services',
+    sectorKr: '커뮤니케이션 서비스',
+    color: '#8B5CF6',
+    totalCount: 23,
+    stocks: [
+      { symbol: 'GOOGL', name: 'Alphabet Inc. Class A', industry: 'Internet Content & Information' },
+      { symbol: 'META', name: 'Meta Platforms Inc.', industry: 'Internet Content & Information' },
+      { symbol: 'NFLX', name: 'Netflix Inc.', industry: 'Entertainment' },
+      { symbol: 'DIS', name: 'The Walt Disney Company', industry: 'Entertainment' },
+      { symbol: 'T', name: 'AT&T Inc.', industry: 'Telecom Services' },
+    ],
+  },
+  {
+    sector: 'Energy',
+    sectorKr: '에너지',
+    color: '#F97316',
+    totalCount: 23,
+    stocks: [
+      { symbol: 'XOM', name: 'Exxon Mobil Corporation', industry: 'Oil & Gas Integrated' },
+      { symbol: 'CVX', name: 'Chevron Corporation', industry: 'Oil & Gas Integrated' },
+      { symbol: 'COP', name: 'ConocoPhillips', industry: 'Oil & Gas E&P' },
+      { symbol: 'SLB', name: 'Schlumberger Limited', industry: 'Oil & Gas Equipment & Services' },
+      { symbol: 'EOG', name: 'EOG Resources Inc.', industry: 'Oil & Gas E&P' },
     ],
   },
 ]

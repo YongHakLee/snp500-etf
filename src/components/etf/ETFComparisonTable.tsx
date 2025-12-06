@@ -20,9 +20,50 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import type { USEtf, KREtf } from '@/types'
+
+/**
+ * AUM 문자열을 숫자로 파싱 (정렬용)
+ * "562B" → 562, "98B" → 98, "1.5T" → 1500
+ */
+function parseAum(aum: string): number {
+  const match = aum.match(/^([\d.]+)([BTM]?)$/)
+  if (!match) return 0
+
+  const value = parseFloat(match[1])
+  const unit = match[2]
+
+  switch (unit) {
+    case 'T': return value * 1000  // Trillion → Billion
+    case 'B': return value
+    case 'M': return value / 1000  // Million → Billion
+    default: return value
+  }
+}
+
+/**
+ * AUM을 한국어 형식으로 변환 ($ 기호 포함)
+ * "562B" → "$5,620억"
+ * "1.4T" → "$1조 4,000억"
+ */
+function formatAumToKorean(aum: string): string {
+  const billions = parseAum(aum)
+  // 1B = 10억 달러
+  const 억 = billions * 10
+
+  if (억 >= 10000) {
+    // 1조 이상
+    const 조 = Math.floor(억 / 10000)
+    const 나머지억 = Math.round(억 % 10000)
+    if (나머지억 > 0) {
+      return `$${조}조 ${나머지억.toLocaleString()}억`
+    }
+    return `$${조}조`
+  }
+
+  return `$${Math.round(억).toLocaleString()}억`
+}
 
 // 미국 ETF 테이블 컬럼 정의
 const usEtfColumns: ColumnDef<USEtf>[] = [
@@ -59,7 +100,7 @@ const usEtfColumns: ColumnDef<USEtf>[] = [
     ),
     cell: ({ row }) => {
       const value = row.getValue('expenseRatio') as number
-      return <span>{(value * 100).toFixed(2)}%</span>
+      return <span>{value.toFixed(4)}%</span>
     },
   },
   {
@@ -69,12 +110,21 @@ const usEtfColumns: ColumnDef<USEtf>[] = [
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="h-auto p-0 hover:bg-transparent"
-        aria-label={`AUM 정렬 (현재: ${column.getIsSorted() === 'asc' ? '오름차순' : column.getIsSorted() === 'desc' ? '내림차순' : '정렬 안됨'})`}
+        aria-label={`순자산 정렬 (현재: ${column.getIsSorted() === 'asc' ? '오름차순' : column.getIsSorted() === 'desc' ? '내림차순' : '정렬 안됨'})`}
       >
-        AUM
+        순자산
         <ArrowUpDown className="ml-1 h-4 w-4" aria-hidden="true" />
       </Button>
     ),
+    cell: ({ row }) => {
+      const value = row.getValue('aum') as string
+      return <span>{formatAumToKorean(value)}</span>
+    },
+    sortingFn: (rowA, rowB) => {
+      const a = parseAum(rowA.getValue('aum') as string)
+      const b = parseAum(rowB.getValue('aum') as string)
+      return a - b
+    },
   },
   {
     accessorKey: 'return5Y',
@@ -83,15 +133,33 @@ const usEtfColumns: ColumnDef<USEtf>[] = [
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="h-auto p-0 hover:bg-transparent"
-        aria-label={`5년 수익률 정렬 (현재: ${column.getIsSorted() === 'asc' ? '오름차순' : column.getIsSorted() === 'desc' ? '내림차순' : '정렬 안됨'})`}
+        aria-label={`5년 연평균 수익률 정렬 (현재: ${column.getIsSorted() === 'asc' ? '오름차순' : column.getIsSorted() === 'desc' ? '내림차순' : '정렬 안됨'})`}
       >
-        5년 수익률
+        5년 연평균 수익률
         <ArrowUpDown className="ml-1 h-4 w-4" aria-hidden="true" />
       </Button>
     ),
     cell: ({ row }) => {
       const value = row.getValue('return5Y') as number
       return <span>{value.toFixed(2)}%</span>
+    },
+  },
+  {
+    accessorKey: 'return5YCumulative',
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        className="h-auto p-0 hover:bg-transparent"
+        aria-label={`5년 누적 수익률 정렬 (현재: ${column.getIsSorted() === 'asc' ? '오름차순' : column.getIsSorted() === 'desc' ? '내림차순' : '정렬 안됨'})`}
+      >
+        5년 누적 수익률
+        <ArrowUpDown className="ml-1 h-4 w-4" aria-hidden="true" />
+      </Button>
+    ),
+    cell: ({ row }) => {
+      const value = row.getValue('return5YCumulative') as number | null
+      return value != null ? <span>{value.toFixed(1)}%</span> : <span>-</span>
     },
   },
   {
@@ -104,6 +172,18 @@ const usEtfColumns: ColumnDef<USEtf>[] = [
     ),
   },
 ]
+
+/**
+ * 한국 ETF 순자산 포맷터 (원화 기호 사용)
+ * 99000억 → "₩9.9조"
+ * 5500억 → "₩5,500억"
+ */
+function formatKRAumToKorean(aumBillion: number): string {
+  if (aumBillion >= 10000) {
+    return `₩${(aumBillion / 10000).toFixed(1)}조`
+  }
+  return `₩${aumBillion.toLocaleString()}억`
+}
 
 // 한국 ETF 테이블 컬럼 정의
 const krEtfColumns: ColumnDef<KREtf>[] = [
@@ -140,7 +220,7 @@ const krEtfColumns: ColumnDef<KREtf>[] = [
     ),
     cell: ({ row }) => {
       const value = row.getValue('expenseRatio') as number
-      return <span>{(value * 100).toFixed(2)}%</span>
+      return <span>{value.toFixed(4)}%</span>
     },
   },
   {
@@ -150,15 +230,67 @@ const krEtfColumns: ColumnDef<KREtf>[] = [
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="h-auto p-0 hover:bg-transparent"
-        aria-label={`AUM 정렬 (현재: ${column.getIsSorted() === 'asc' ? '오름차순' : column.getIsSorted() === 'desc' ? '내림차순' : '정렬 안됨'})`}
+        aria-label={`순자산 정렬 (현재: ${column.getIsSorted() === 'asc' ? '오름차순' : column.getIsSorted() === 'desc' ? '내림차순' : '정렬 안됨'})`}
       >
-        AUM(억원)
+        순자산
         <ArrowUpDown className="ml-1 h-4 w-4" aria-hidden="true" />
       </Button>
     ),
     cell: ({ row }) => {
       const value = row.getValue('aum') as number
-      return <span>{value.toLocaleString()}</span>
+      return <span>{formatKRAumToKorean(value)}</span>
+    },
+  },
+  {
+    accessorKey: 'returnCAGR',
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        className="h-auto p-0 hover:bg-transparent"
+        aria-label={`연평균 수익률 정렬 (현재: ${column.getIsSorted() === 'asc' ? '오름차순' : column.getIsSorted() === 'desc' ? '내림차순' : '정렬 안됨'})`}
+      >
+        연평균 수익률
+        <ArrowUpDown className="ml-1 h-4 w-4" aria-hidden="true" />
+      </Button>
+    ),
+    cell: ({ row }) => {
+      const etf = row.original as KREtf
+      const cagr = etf.returnCAGR ?? etf.return5Y
+      const years = etf.returnYears
+      if (cagr == null) return <span>-</span>
+      return (
+        <span title={years ? `${years}년 기준 연평균 수익률` : undefined}>
+          {cagr.toFixed(2)}%
+          {years && <span className="text-muted-foreground text-xs ml-1">({years}년)</span>}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: 'returnCumulative',
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        className="h-auto p-0 hover:bg-transparent"
+        aria-label={`누적 수익률 정렬 (현재: ${column.getIsSorted() === 'asc' ? '오름차순' : column.getIsSorted() === 'desc' ? '내림차순' : '정렬 안됨'})`}
+      >
+        누적 수익률
+        <ArrowUpDown className="ml-1 h-4 w-4" aria-hidden="true" />
+      </Button>
+    ),
+    cell: ({ row }) => {
+      const etf = row.original as KREtf
+      const cumulative = etf.returnCumulative ?? etf.return5YCumulative
+      const periodLabel = etf.returnPeriodLabel
+      if (cumulative == null) return <span>-</span>
+      return (
+        <span title={periodLabel ? `${periodLabel} 누적 수익률` : undefined}>
+          {cumulative.toFixed(1)}%
+          {periodLabel && <span className="text-muted-foreground text-xs ml-1">({periodLabel})</span>}
+        </span>
+      )
     },
   },
   {
@@ -176,40 +308,6 @@ const krEtfColumns: ColumnDef<KREtf>[] = [
           <X className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
           <span className="sr-only">환헤지 미적용</span>
         </span>
-      )
-    },
-  },
-  {
-    accessorKey: 'totalReturn',
-    header: 'TR',
-    cell: ({ row }) => {
-      const tr = row.getValue('totalReturn') as boolean
-      return tr ? (
-        <span className="flex items-center" role="img" aria-label="배당 재투자(TR) 적용">
-          <Check className="h-4 w-4 text-green-600" aria-hidden="true" />
-          <span className="sr-only">배당 재투자 적용</span>
-        </span>
-      ) : (
-        <span className="flex items-center" role="img" aria-label="배당 재투자(TR) 미적용">
-          <X className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
-          <span className="sr-only">배당 재투자 미적용</span>
-        </span>
-      )
-    },
-  },
-  {
-    accessorKey: 'features',
-    header: '특징',
-    cell: ({ row }) => {
-      const features = row.getValue('features') as string[]
-      return (
-        <div className="flex flex-wrap gap-1">
-          {features.map((feature, index) => (
-            <Badge key={index} variant="secondary" className="text-xs">
-              {feature}
-            </Badge>
-          ))}
-        </div>
       )
     },
   },

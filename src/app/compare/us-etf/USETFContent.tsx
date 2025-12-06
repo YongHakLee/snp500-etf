@@ -1,59 +1,129 @@
-'use client'
+"use client";
 
-import { useMemo } from 'react'
-import Link from 'next/link'
-import { PageHeader } from '@/components/common/PageHeader'
-import { SectionCard } from '@/components/common/SectionCard'
-import { Disclaimer } from '@/components/common/Disclaimer'
-import { DataStatus } from '@/components/common/DataStatus'
-import { ETFComparisonTable } from '@/components/etf/ETFComparisonTable'
-import { LazyExpenseChart } from '@/components/compare/LazyExpenseChart'
-import { LazyExpenseCalculator } from '@/components/compare/LazyExpenseCalculator'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { TrendingUp, Zap, Info } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import { useUSEtfs } from '@/hooks'
-import type { ExpenseChartData } from '@/components/charts/ExpenseComparisonChart'
+import { useMemo } from "react";
+import Link from "next/link";
+import { PageHeader } from "@/components/common/PageHeader";
+import { SectionCard } from "@/components/common/SectionCard";
+import { Disclaimer } from "@/components/common/Disclaimer";
+import { DataStatus } from "@/components/common/DataStatus";
+import { ETFComparisonTable } from "@/components/etf/ETFComparisonTable";
+import { LazyExpenseAumChart } from "@/components/compare/LazyExpenseAumChart";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { TrendingUp, Zap, Info, CheckCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useUSEtfs } from "@/hooks";
+import type { ExpenseAumChartData } from "@/types";
 
 // 추천 시나리오 데이터
 const recommendations = [
   {
-    title: '장기 투자자',
+    title: "장기 투자자",
     icon: TrendingUp,
-    recommended: 'VOO 또는 SPLG',
-    description: '10년 이상 장기 투자를 계획한다면 보수율이 낮은 VOO(0.03%)나 SPLG(0.02%)가 적합합니다. 보수율 차이가 장기간 복리로 큰 차이를 만들어냅니다.',
-    color: 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800',
+    recommended: "VOO 또는 SPYM",
+    description:
+      "10년 이상 장기 투자를 계획한다면 보수율이 낮은 VOO(0.03%)나 SPYM(0.02%)가 적합합니다. 보수율 차이가 장기간 복리로 큰 차이를 만들어냅니다.",
+    color:
+      "bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800",
   },
   {
-    title: '액티브 트레이더',
+    title: "액티브 트레이더",
     icon: Zap,
-    recommended: 'SPY',
-    description: '단기 매매나 옵션 거래를 한다면 유동성이 가장 높은 SPY가 적합합니다. 스프레드가 가장 좁고 거래량이 압도적입니다.',
-    color: 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800',
+    recommended: "SPY",
+    description:
+      "단기 매매나 옵션 거래를 한다면 유동성이 가장 높은 SPY가 적합합니다. 스프레드가 가장 좁고 거래량이 압도적입니다.",
+    color:
+      "bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800",
   },
-]
+];
+
+// ETF 소개 데이터
+const etfIntroductions = [
+  {
+    ticker: "SPY",
+    provider: "State Street",
+    tagline: "최초의 S&P500 ETF, 옵션/단기 매매에 최적",
+    badges: [{ label: "최고 유동성", variant: "default" as const }],
+    highlight: false,
+  },
+  {
+    ticker: "VOO",
+    provider: "Vanguard",
+    tagline: "장기 투자자 1순위, 초저비용",
+    badges: [{ label: "추천", variant: "default" as const }],
+    highlight: true,
+  },
+  {
+    ticker: "IVV",
+    provider: "BlackRock",
+    tagline: "기관 투자자 선호, VOO와 동일한 보수율",
+    badges: [{ label: "기관 선호", variant: "secondary" as const }],
+    highlight: false,
+  },
+  {
+    ticker: "SPYM",
+    provider: "State Street",
+    tagline: "가장 낮은 보수율, 적립식 투자에 적합",
+    badges: [{ label: "최저 보수율", variant: "outline" as const }],
+    highlight: false,
+  },
+];
+
+// AUM 문자열을 십억 달러 단위로 변환
+function parseAumToBillions(aum: string): number {
+  const value = parseFloat(aum);
+  if (aum.includes("T")) return value * 1000; // 1.4T → 1400
+  if (aum.includes("B")) return value; // 672.7B → 672.7
+  if (aum.includes("M")) return value / 1000; // 100M → 0.1
+  return value;
+}
+
+/**
+ * AUM을 한국어 형식으로 변환 ($ 기호 포함)
+ * "672.7B" → "$6,727억"
+ * "1.4T" → "$1조 4,000억"
+ */
+function formatAumToKorean(aum: string): string {
+  const billions = parseAumToBillions(aum);
+  // 1B = 10억 달러
+  const 억 = billions * 10;
+
+  if (억 >= 10000) {
+    // 1조 이상
+    const 조 = Math.floor(억 / 10000);
+    const 나머지억 = Math.round(억 % 10000);
+    if (나머지억 > 0) {
+      return `$${조}조 ${나머지억.toLocaleString()}억`;
+    }
+    return `$${조}조`;
+  }
+
+  return `$${Math.round(억).toLocaleString()}억`;
+}
 
 export function USETFContent() {
-  const { etfs, isLive, lastUpdated } = useUSEtfs()
+  const { etfs, isLive, lastUpdated } = useUSEtfs();
 
-  // 차트용 데이터 변환
-  const chartData: ExpenseChartData[] = useMemo(() => {
+  // 보수율 + 순자산 듀얼 차트용 데이터 변환
+  const expenseAumChartData: ExpenseAumChartData[] = useMemo(() => {
     return etfs.map((etf) => ({
       ticker: etf.ticker,
       name: etf.name,
-      expenseRatio: etf.expenseRatio * 100, // 퍼센트로 변환
-      type: 'US' as const,
-    }))
-  }, [etfs])
+      expenseRatio: etf.expenseRatio, // 이미 퍼센트 값 (0.03 = 0.03%)
+      aumBillions: parseAumToBillions(etf.aum),
+      aumDisplay: formatAumToKorean(etf.aum),
+      isOptimal: etf.ticker === "VOO", // VOO = 최적 선택
+    }));
+  }, [etfs]);
 
   return (
     <div className="container py-10">
       <PageHeader
-        title="미국 ETF 비교"
-        description="SPY, VOO, IVV, SPLG 등 미국 상장 S&P500 ETF를 보수율, 거래량, 수익률 기준으로 비교합니다."
+        title="미국 ETF"
+        description="SPY, VOO, IVV, SPYM 등 미국 상장 S&P500 ETF를 보수율, 거래량, 수익률 기준으로 비교합니다."
         breadcrumbs={[
-          { label: 'ETF 비교', href: '/compare' },
-          { label: '미국 ETF', href: '/compare/us-etf' },
+          { label: "ETF 비교", href: "/compare" },
+          { label: "미국 ETF", href: "/compare/us-etf" },
         ]}
       />
 
@@ -62,8 +132,8 @@ export function USETFContent() {
         <Link
           href="/compare/us-etf"
           className={cn(
-            'px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors',
-            'border-primary text-primary'
+            "px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors",
+            "border-primary text-primary"
           )}
         >
           미국 ETF
@@ -71,8 +141,8 @@ export function USETFContent() {
         <Link
           href="/compare/kr-etf"
           className={cn(
-            'px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors',
-            'border-transparent text-muted-foreground hover:text-foreground hover:border-muted-foreground'
+            "px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors",
+            "border-transparent text-muted-foreground hover:text-foreground hover:border-muted-foreground"
           )}
         >
           한국 ETF
@@ -80,6 +150,47 @@ export function USETFContent() {
       </div>
 
       <div className="space-y-8">
+        {/* S&P500 ETF 알아보기 */}
+        <SectionCard
+          title="S&P500 ETF 알아보기"
+          description="미국에 상장된 대표적인 S&P500 추종 ETF 4종을 소개합니다."
+        >
+          <div className="grid gap-4 sm:grid-cols-2">
+            {etfIntroductions.map((etf) => (
+              <div
+                key={etf.ticker}
+                className={cn(
+                  "rounded-lg border p-4 transition-colors",
+                  etf.highlight && "border-primary/50 bg-primary/5"
+                )}
+              >
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h3 className="font-semibold">{etf.ticker}</h3>
+                    <p className="text-xs text-muted-foreground">
+                      {etf.provider}
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-1">
+                    {etf.badges.map((badge, idx) => (
+                      <Badge
+                        key={idx}
+                        variant={badge.variant}
+                        className="text-xs"
+                      >
+                        {badge.label}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  {etf.tagline}
+                </p>
+              </div>
+            ))}
+          </div>
+        </SectionCard>
+
         {/* ETF 비교 테이블 */}
         <SectionCard
           title="미국 S&P500 ETF 비교"
@@ -91,25 +202,57 @@ export function USETFContent() {
           <ETFComparisonTable
             data={etfs}
             type="us"
-            highlightTickers={['VOO']}
+            highlightTickers={["VOO"]}
           />
-          <p className="mt-4 text-sm text-muted-foreground">
-            * VOO는 낮은 보수율로 장기 투자자에게 가장 추천되는 ETF입니다.
-          </p>
+          <div className="mt-4 text-sm text-muted-foreground space-y-1 border-t pt-4">
+            <p>
+              * <strong>보수율</strong>: ETF 운용사에 지불하는 연간 수수료율.
+              낮을수록 장기 투자에 유리
+            </p>
+            <p>
+              * <strong>순자산 (AUM)</strong>: 펀드에 투자된 총 자산 규모.
+              클수록 유동성이 좋고 안정적
+            </p>
+            <p>
+              * <strong>5년 연평균 수익률 (CAGR)</strong>: 연평균 복리 수익률로,
+              투자 성과를 연 단위로 비교할 때 사용
+            </p>
+            <p>
+              * <strong>5년 누적 수익률</strong>: 5년간 총 수익률로, 실제 투자
+              시 얻을 수 있는 총 수익을 의미
+            </p>
+            <p>
+              * <strong>대상 투자자</strong>: 해당 ETF가 적합한 투자자 유형
+            </p>
+          </div>
         </SectionCard>
 
-        {/* 보수율 비교 차트 */}
+        {/* 보수율 및 순자산 비교 차트 */}
         <SectionCard
-          title="보수율 비교"
-          description="ETF별 연간 보수율(Expense Ratio)을 시각적으로 비교합니다. 보수율은 매년 운용 자산에서 차감됩니다."
+          title="보수율 및 순자산 비교"
+          description="ETF별 연간 보수율과 순자산 규모를 시각적으로 비교합니다. 낮은 보수율과 큰 순자산 규모가 장기투자에 유리합니다."
         >
-          <LazyExpenseChart data={chartData} />
-          <div className="mt-4 rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4">
-            <h3 className="text-sm font-medium">보수율이 중요한 이유</h3>
-            <p className="mt-1 text-sm text-muted-foreground">
-              1억원을 10년간 투자할 경우, 0.03% vs 0.0945% 보수율 차이로 약 65만원 이상의 비용 차이가 발생합니다.
-              장기 투자할수록 복리 효과로 이 차이는 더욱 커집니다.
-            </p>
+          <LazyExpenseAumChart data={expenseAumChartData} />
+
+          {/* 추천 안내 박스 */}
+          <div className="mt-6 rounded-lg border border-orange-200 dark:border-orange-800 bg-orange-50/50 dark:bg-orange-900/10 p-4">
+            <div className="flex items-start gap-3">
+              <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-orange-600 dark:text-orange-400" />
+              <div>
+                <h3 className="font-semibold text-orange-700 dark:text-orange-300">
+                  장기투자에 최적인 ETF 선택 기준
+                </h3>
+                <p className="mt-1 text-sm text-orange-600 dark:text-orange-400">
+                  <strong>낮은 보수율 + 큰 순자산 규모</strong>가 이상적입니다.
+                  <strong className="ml-1">VOO</strong>는 0.03%의 낮은 보수율과
+                  1.4조 달러의 압도적인 순자산으로 장기 투자자에게 최적입니다.
+                </p>
+                <p className="mt-2 text-xs text-orange-500 dark:text-orange-500">
+                  * 1억원을 10년간 투자할 경우, SPY(0.0945%) 대비 VOO(0.03%)로
+                  약 65만원 이상의 비용을 절감할 수 있습니다.
+                </p>
+              </div>
+            </div>
           </div>
         </SectionCard>
 
@@ -120,11 +263,11 @@ export function USETFContent() {
         >
           <div className="grid gap-4 md:grid-cols-2">
             {recommendations.map((rec) => {
-              const Icon = rec.icon
+              const Icon = rec.icon;
               return (
                 <div
                   key={rec.title}
-                  className={cn('rounded-lg border p-4', rec.color)}
+                  className={cn("rounded-lg border p-4", rec.color)}
                 >
                   <div className="flex items-center gap-2">
                     <Icon className="h-5 w-5" />
@@ -137,52 +280,9 @@ export function USETFContent() {
                     {rec.description}
                   </p>
                 </div>
-              )
+              );
             })}
           </div>
-        </SectionCard>
-
-        {/* ETF 상세 정보 */}
-        <SectionCard
-          title="ETF 상세 비교"
-          description="각 ETF의 특징을 상세히 비교해보세요."
-        >
-          <div className="space-y-4">
-            <div className="rounded-lg border p-4">
-              <h3 className="font-semibold">SPY - SPDR S&P 500 ETF Trust</h3>
-              <p className="mt-1 text-sm text-muted-foreground">
-                1993년 출시된 최초의 S&P500 ETF로, 가장 긴 역사와 높은 유동성을 자랑합니다.
-                일일 거래량이 6,000만 주 이상으로 옵션 거래와 단기 매매에 적합합니다.
-                다만 보수율(0.0945%)이 다른 ETF보다 높습니다.
-              </p>
-            </div>
-            <div className="rounded-lg border p-4">
-              <h3 className="font-semibold">VOO - Vanguard S&P 500 ETF</h3>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Vanguard가 운용하는 대표적인 저비용 ETF입니다. 0.03%의 낮은 보수율로
-                장기 투자자들에게 가장 인기 있습니다. 배당금 자동 재투자 기능을 제공합니다.
-              </p>
-            </div>
-            <div className="rounded-lg border p-4">
-              <h3 className="font-semibold">IVV - iShares Core S&P 500 ETF</h3>
-              <p className="mt-1 text-sm text-muted-foreground">
-                BlackRock이 운용하는 iShares 시리즈의 대표 ETF입니다.
-                VOO와 동일한 0.03% 보수율을 제공하며, 기관 투자자들에게 인기가 높습니다.
-              </p>
-            </div>
-            <div className="rounded-lg border p-4">
-              <h3 className="font-semibold">SPLG - SPDR Portfolio S&P 500 ETF</h3>
-              <p className="mt-1 text-sm text-muted-foreground">
-                State Street가 운용하는 저비용 버전 S&P500 ETF입니다.
-                0.02%로 가장 낮은 보수율을 제공하며, 주당 가격이 저렴하여 소액 투자자에게 적합합니다.
-              </p>
-            </div>
-          </div>
-        </SectionCard>
-
-        {/* 비용 계산기 - Lazy Loading */}
-        <SectionCard>
-          <LazyExpenseCalculator />
         </SectionCard>
 
         {/* 주의사항 */}
@@ -190,10 +290,21 @@ export function USETFContent() {
           <Info className="h-4 w-4" />
           <AlertTitle>미국 ETF 투자 시 고려사항</AlertTitle>
           <AlertDescription className="mt-2 space-y-2">
-            <p>• <strong>환율 영향</strong>: 달러로 거래되므로 환율 변동에 노출됩니다.</p>
-            <p>• <strong>세금</strong>: 양도소득 연간 250만원 초과분에 22% 과세됩니다.</p>
-            <p>• <strong>배당세</strong>: 미국 배당소득세 15%가 원천징수됩니다.</p>
-            <p>• <strong>거래 시간</strong>: 한국 시간 기준 밤 11:30 ~ 새벽 6:00 (서머타임 시 변동)</p>
+            <p>
+              • <strong>환율 영향</strong>: 달러로 거래되므로 환율 변동에
+              노출됩니다.
+            </p>
+            <p>
+              • <strong>세금</strong>: 양도소득 연간 250만원 초과분에 22%
+              과세됩니다.
+            </p>
+            <p>
+              • <strong>배당세</strong>: 미국 배당소득세 15%가 원천징수됩니다.
+            </p>
+            <p>
+              • <strong>거래 시간</strong>: 한국 시간 기준 밤 11:30 ~ 새벽 6:00
+              (서머타임 시 변동)
+            </p>
           </AlertDescription>
         </Alert>
 
@@ -201,5 +312,5 @@ export function USETFContent() {
         <Disclaimer />
       </div>
     </div>
-  )
+  );
 }

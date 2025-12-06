@@ -5,48 +5,65 @@
       "name": "SPDR S&P 500 ETF Trust",
       "provider": "State Street",
       "expenseRatio": 0.0945,
-      "aum": "562B",
-      "avgVolume": "62.75M",
+      "aum": "672.7B",
+      "avgVolume": "79.53M",
       "dividendReinvest": false,
       "targetAudience": "액티브 트레이더, 옵션 거래",
-      "return5Y": 17.40,
-      "inceptionDate": "1993-01-22"
+      "return5Y": 17.4,
+      "return5YCumulative": 122.53,
+      "inceptionDate": "1993-01-22",
+      "aumUpdated": "2025-12-05T13:04:22.086201",
+      "avgVolumeUpdated": "2025-12-05T13:04:22.086201"
     },
     {
       "ticker": "VOO",
       "name": "Vanguard S&P 500 ETF",
       "provider": "Vanguard",
       "expenseRatio": 0.03,
-      "aum": "478B",
-      "avgVolume": "4.5M",
+      "aum": "1.4T",
+      "avgVolume": "8.09M",
       "dividendReinvest": true,
       "targetAudience": "장기 투자자, 비용 중시",
-      "return5Y": 17.60,
-      "inceptionDate": "2010-09-07"
+      "return5Y": 17.6,
+      "return5YCumulative": 124.78,
+      "inceptionDate": "2010-09-07",
+      "aumUpdated": "2025-12-05T13:04:22.086201",
+      "avgVolumeUpdated": "2025-12-05T13:04:22.086201"
     },
     {
       "ticker": "IVV",
       "name": "iShares Core S&P 500 ETF",
       "provider": "BlackRock",
       "expenseRatio": 0.03,
-      "aum": "421B",
-      "avgVolume": "4.2M",
+      "aum": "701.4B",
+      "avgVolume": "7.63M",
       "dividendReinvest": false,
       "targetAudience": "장기 투자자, 기관 투자자",
       "return5Y": 17.55,
-      "inceptionDate": "2000-05-15"
+      "return5YCumulative": 124.23,
+      "inceptionDate": "2000-05-15",
+      "aumUpdated": "2025-12-05T13:04:22.086201",
+      "avgVolumeUpdated": "2025-12-05T13:04:22.086201"
     },
     {
-      "ticker": "SPLG",
+      "ticker": "SPYM",
       "name": "SPDR Portfolio S&P 500 ETF",
       "provider": "State Street",
       "expenseRatio": 0.02,
-      "aum": "32B",
-      "avgVolume": "3.8M",
+      "aum": "86.8B",
+      "avgVolume": "9.94M",
       "dividendReinvest": false,
       "targetAudience": "소액 투자자, 적립식 투자",
-      "return5Y": 17.50,
-      "inceptionDate": "2005-11-08"
+      "return5Y": 14.59,
+      "return5YCumulative": 97.91,
+      "inceptionDate": "2005-11-08",
+      "aumUpdated": "2025-12-05T13:04:22.086201",
+      "avgVolumeUpdated": "2025-12-05T13:04:22.086201"
     }
-  ]
+  ],
+  "metadata": {
+    "lastUpdated": "2025-12-05T13:04:22.086201",
+    "updatedBy": "yfinance_service",
+    "version": "1.1.0"
+  }
 }

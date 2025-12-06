@@ -234,27 +234,6 @@ export default function WhyInvestContent() {
           </div>
         </SectionCard>
 
-        {/* CTA 섹션 */}
-        <div className="rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-6 text-center">
-          <h3 className="mb-2 text-xl font-bold">투자를 시작할 준비가 되셨나요?</h3>
-          <p className="mb-4 text-muted-foreground">
-            ETF 비교와 실제 투자 방법을 알아보세요.
-          </p>
-          <div className="flex flex-col justify-center gap-3 sm:flex-row">
-            <a
-              href="/compare"
-              className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-            >
-              ETF 비교하기
-            </a>
-            <a
-              href="/guide"
-              className="inline-flex items-center justify-center rounded-md border border-input bg-background px-6 py-2 text-sm font-medium hover:bg-accent"
-            >
-              투자 가이드 보기
-            </a>
-          </div>
-        </div>
       </div>
     </div>
   )

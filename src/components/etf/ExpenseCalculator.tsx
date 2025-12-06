@@ -90,7 +90,7 @@ export function ExpenseCalculator() {
     const config: Record<string, { label: string; color: string }> = {}
     selectedEtfData.forEach((etf, index) => {
       config[etf.ticker] = {
-        label: `${etf.ticker} (${(etf.expenseRatio * 100).toFixed(2)}%)`,
+        label: `${etf.ticker} (${etf.expenseRatio.toFixed(4)}%)`,
         color: CHART_COLORS[index % CHART_COLORS.length],
       }
     })
@@ -231,7 +231,7 @@ export function ExpenseCalculator() {
                     >
                       {etf.ticker}{' '}
                       <span className="text-muted-foreground">
-                        ({(etf.expenseRatio * 100).toFixed(2)}%)
+                        ({etf.expenseRatio.toFixed(4)}%)
                       </span>
                     </label>
                   </div>
@@ -264,7 +264,7 @@ export function ExpenseCalculator() {
                     >
                       {etf.name.split(' ')[0]}{' '}
                       <span className="text-muted-foreground">
-                        ({(etf.expenseRatio * 100).toFixed(4)}%)
+                        ({etf.expenseRatio.toFixed(4)}%)
                       </span>
                     </label>
                   </div>
@@ -337,7 +337,7 @@ export function ExpenseCalculator() {
                   <tr key={item.ticker} className="border-b">
                     <td className="py-2 px-2 font-medium">{item.ticker}</td>
                     <td className="text-right py-2 px-2">
-                      {(item.expenseRatio * 100).toFixed(4)}%
+                      {item.expenseRatio.toFixed(4)}%
                     </td>
                     <td className="text-right py-2 px-2">
                       {Math.round(item.annualCost).toLocaleString()}원
