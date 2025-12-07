@@ -1,8 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Cell, ResponsiveContainer, LabelList } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Cell, LabelList } from 'recharts'
 import { Card, CardContent } from '@/components/ui/card'
 
 // 비용 비교 데이터 (10년 투자 시 1,000만원 기준)
@@ -37,17 +36,6 @@ const chartConfig = {
 }
 
 export function ExpenseFeeChart() {
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
-
   const formatCurrency = (value: number) => {
     if (value === 0) return '0원'
     if (value >= 1000000) return `${(value / 10000).toFixed(0)}만원`
@@ -60,51 +48,23 @@ export function ExpenseFeeChart() {
       <div className="text-sm text-muted-foreground text-center">
         1,000만원 투자 시 10년간 비용 비교 (단순 계산)
       </div>
-      <ChartContainer config={chartConfig} className="h-[250px] w-full md:h-[300px]">
+      <ChartContainer config={chartConfig} className="h-[180px] w-full md:h-[240px]">
         <BarChart
+          accessibilityLayer
           data={feeComparisonData}
-          layout={isMobile ? 'vertical' : 'horizontal'}
-          margin={isMobile
-            ? { top: 5, right: 60, left: 60, bottom: 5 }
-            : { top: 20, right: 30, left: 20, bottom: 40 }
-          }
+          layout="vertical"
+          margin={{ left: 0, right: 60 }}
         >
-          <CartesianGrid strokeDasharray="3 3" vertical={!isMobile} horizontal={isMobile} />
-          {isMobile ? (
-            <>
-              <XAxis
-                type="number"
-                tickLine={false}
-                axisLine={false}
-                tickFormatter={formatCurrency}
-              />
-              <YAxis
-                type="category"
-                dataKey="type"
-                tickLine={false}
-                axisLine={false}
-                width={50}
-                tick={{ fontSize: 12 }}
-              />
-            </>
-          ) : (
-            <>
-              <XAxis
-                type="category"
-                dataKey="type"
-                tickLine={false}
-                axisLine={false}
-                tick={{ fontSize: 12 }}
-                height={50}
-              />
-              <YAxis
-                type="number"
-                tickLine={false}
-                axisLine={false}
-                tickFormatter={formatCurrency}
-              />
-            </>
-          )}
+          <CartesianGrid horizontal={false} strokeDasharray="3 3" />
+          <XAxis type="number" hide />
+          <YAxis
+            dataKey="type"
+            type="category"
+            tickLine={false}
+            axisLine={false}
+            width={50}
+            tick={{ fontSize: 13, fontWeight: 500 }}
+          />
           <ChartTooltip
             content={
               <ChartTooltipContent
@@ -124,32 +84,43 @@ export function ExpenseFeeChart() {
               />
             }
           />
-          <Bar dataKey="tenYearCost" radius={[4, 4, 0, 0]}>
+          <Bar dataKey="tenYearCost" radius={[0, 4, 4, 0]}>
             {feeComparisonData.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={entry.color} />
             ))}
-            {!isMobile && (
-              <LabelList
-                dataKey="tenYearCost"
-                position="top"
-                formatter={formatCurrency}
-                className="text-xs fill-muted-foreground"
-              />
-            )}
+            <LabelList
+              dataKey="tenYearCost"
+              position="right"
+              offset={8}
+              formatter={formatCurrency}
+              className="fill-foreground text-xs md:text-sm"
+            />
           </Bar>
         </BarChart>
       </ChartContainer>
 
-      {/* 상세 정보 카드 */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
+      {/* 비용 정보 카드 - 모든 화면에서 3열 */}
+      <div className="grid grid-cols-3 gap-2 mt-4 md:gap-3">
         {feeComparisonData.map((item, index) => (
-          <Card key={index} className="border-2" style={{ borderColor: item.color }}>
-            <CardContent className="p-3 space-y-1">
-              <div className="font-medium text-sm">{item.type.replace('\n', ' ')}</div>
-              <div className="text-xs text-muted-foreground">보수율: {item.expenseRatio}%</div>
-              <div className="text-xs text-muted-foreground">연간: {formatCurrency(item.annualFee)}</div>
-              <div className="text-sm font-semibold text-primary">
-                10년: {formatCurrency(item.tenYearCost)}
+          <Card key={index} className="border-2 overflow-hidden" style={{ borderColor: item.color }}>
+            <CardContent className="p-2 md:p-4 space-y-0.5 md:space-y-1.5">
+              {/* 유형명 - 컬러 강조 */}
+              <div
+                className="font-bold text-sm md:text-base text-center"
+                style={{ color: item.color }}
+              >
+                {item.type.replace('\n', ' ')}
+              </div>
+
+              {/* 10년 비용 - 가장 중요한 정보 */}
+              <div className="text-base md:text-lg font-bold text-primary text-center">
+                {formatCurrency(item.tenYearCost)}
+              </div>
+
+              {/* 세부 정보 - 보조 */}
+              <div className="text-[10px] md:text-xs text-muted-foreground text-center space-y-0.5 pt-1 border-t border-dashed">
+                <div>보수율: {item.expenseRatio}%</div>
+                <div>연간: {formatCurrency(item.annualFee)}</div>
               </div>
             </CardContent>
           </Card>
