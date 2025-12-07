@@ -39,7 +39,7 @@ export function QuickNavigation() {
                 className="h-auto min-h-[48px] py-3 px-4 md:px-6"
               >
                 <Link href={link.href} className="flex items-center gap-2 md:gap-3">
-                  <Icon className="h-5 w-5 text-primary" />
+                  <Icon className="h-5 w-5 text-accent-orange" />
                   <div className="text-left">
                     <span className="font-semibold">{link.title}</span>
                     <span className="hidden md:inline text-muted-foreground ml-2 text-sm font-normal">

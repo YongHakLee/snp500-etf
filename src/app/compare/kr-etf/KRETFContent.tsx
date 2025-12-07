@@ -120,7 +120,7 @@ export function KRETFContent() {
           href="/compare/kr-etf"
           className={cn(
             "px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors",
-            "border-primary text-primary"
+            "border-accent-orange text-accent-orange"
           )}
         >
           한국 ETF

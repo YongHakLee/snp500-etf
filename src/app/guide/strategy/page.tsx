@@ -173,7 +173,7 @@ export default function StrategyPage() {
               <CardContent>
                 <div className="space-y-3">
                   <div>
-                    <p className="text-sm font-medium text-green-600">장점</p>
+                    <p className="text-sm font-medium text-accent-orange">장점</p>
                     <ul className="mt-1 space-y-1 text-sm text-muted-foreground">
                       <li>• 장기적으로 수익률 높을 가능성</li>
                       <li>• 단순한 관리</li>
@@ -210,7 +210,7 @@ export default function StrategyPage() {
               <CardContent>
                 <div className="space-y-3">
                   <div>
-                    <p className="text-sm font-medium text-green-600">장점</p>
+                    <p className="text-sm font-medium text-accent-orange">장점</p>
                     <ul className="mt-1 space-y-1 text-sm text-muted-foreground">
                       <li>• 시점 분산 효과</li>
                       <li>• 심리적 안정감</li>

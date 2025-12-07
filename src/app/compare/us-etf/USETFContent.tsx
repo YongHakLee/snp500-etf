@@ -23,8 +23,7 @@ const recommendations = [
     recommended: "VOO 또는 SPYM",
     description:
       "10년 이상 장기 투자를 계획한다면 보수율이 낮은 VOO(0.03%)나 SPYM(0.02%)가 적합합니다. 보수율 차이가 장기간 복리로 큰 차이를 만들어냅니다.",
-    color:
-      "bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800",
+    color: "bg-accent-orange-muted border-accent-orange/30",
   },
   {
     title: "액티브 트레이더",
@@ -133,7 +132,7 @@ export function USETFContent() {
           href="/compare/us-etf"
           className={cn(
             "px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors",
-            "border-primary text-primary"
+            "border-accent-orange text-accent-orange"
           )}
         >
           미국 ETF
@@ -161,7 +160,7 @@ export function USETFContent() {
                 key={etf.ticker}
                 className={cn(
                   "rounded-lg border p-4 transition-colors",
-                  etf.highlight && "border-primary/50 bg-primary/5"
+                  etf.highlight && "border-accent-orange/50 bg-accent-orange-muted"
                 )}
               >
                 <div className="flex items-start justify-between">
@@ -273,7 +272,7 @@ export function USETFContent() {
                     <Icon className="h-5 w-5" />
                     <h3 className="font-medium">{rec.title}</h3>
                   </div>
-                  <p className="mt-2 text-sm font-semibold text-primary">
+                  <p className="mt-2 text-sm font-semibold text-accent-orange">
                     추천: {rec.recommended}
                   </p>
                   <p className="mt-1 text-sm text-muted-foreground">

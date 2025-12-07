@@ -158,9 +158,9 @@ export default function TaxPage() {
                 <li>• 직접 운용 선호</li>
               </ul>
             </div>
-            <div className="rounded-lg bg-green-50 p-4 dark:bg-green-950">
-              <h3 className="mb-2 font-medium text-green-900 dark:text-green-100">국내 ETF 추천 상황</h3>
-              <ul className="space-y-1 text-sm text-green-800 dark:text-green-200">
+            <div className="rounded-lg bg-accent-orange-muted p-4 border border-accent-orange/20">
+              <h3 className="mb-2 font-medium text-accent-orange">국내 ETF 추천 상황</h3>
+              <ul className="space-y-1 text-sm text-muted-foreground">
                 <li>• 세금 신고 부담 최소화</li>
                 <li>• ISA/연금 계좌 활용</li>
                 <li>• 환율 변동 위험 회피 (환헤지)</li>
@@ -311,12 +311,12 @@ export default function TaxPage() {
               </div>
             </div>
 
-            <div className="rounded-lg bg-green-50 p-4 dark:bg-green-950">
-              <h3 className="mb-2 flex items-center gap-2 font-medium text-green-900 dark:text-green-100">
+            <div className="rounded-lg bg-accent-orange-muted p-4 border border-accent-orange/20">
+              <h3 className="mb-2 flex items-center gap-2 font-medium text-accent-orange">
                 <CheckCircle2 className="h-4 w-4" />
                 국내 상장 ETF는 신고 불필요
               </h3>
-              <p className="text-sm text-green-800 dark:text-green-200">
+              <p className="text-sm text-muted-foreground">
                 국내 상장 S&P500 ETF(TIGER, KODEX 등)는 배당소득세가 자동으로 원천징수되어
                 별도의 세금 신고가 필요하지 않습니다.
               </p>

@@ -56,12 +56,12 @@ export function BottomTabBar() {
               className={cn(
                 'flex flex-col items-center justify-center gap-1 text-xs transition-colors',
                 active
-                  ? 'text-primary'
+                  ? 'text-accent-orange'
                   : 'text-muted-foreground hover:text-foreground'
               )}
             >
-              <Icon className={cn('h-5 w-5', active && 'text-primary')} />
-              <span className={cn('font-medium', active && 'text-primary')}>
+              <Icon className={cn('h-5 w-5', active && 'text-accent-orange')} />
+              <span className={cn('font-medium', active && 'text-accent-orange')}>
                 {tab.label}
               </span>
             </Link>

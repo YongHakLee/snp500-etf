@@ -113,7 +113,7 @@ export default function HomePage() {
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
               S&P500 ETF 투자,
               <br />
-              <span className="text-primary">쉽게 시작하세요</span>
+              <span className="text-accent-orange">쉽게 시작하세요</span>
             </h1>
             <p className="mt-4 text-base text-muted-foreground sm:mt-6 sm:text-lg md:text-xl">
               미국 500대 기업에 한 번에 투자하는 방법.
@@ -144,17 +144,17 @@ export default function HomePage() {
               return (
                 <Card
                   key={section.value}
-                  className="group hover:shadow-lg hover:border-primary/50 hover:scale-[1.02] transition-all duration-200"
+                  className="group hover:shadow-lg hover:border-accent-orange/50 hover:scale-[1.02] transition-all duration-200"
                 >
                   <CardHeader className="pb-4">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent-orange text-accent-orange-foreground">
                         <Icon className="h-5 w-5" />
                       </div>
                       <div>
                         <Link
                           href={section.href}
-                          className="hover:text-primary transition-colors"
+                          className="hover:text-accent-orange transition-colors"
                         >
                           <CardTitle className="text-lg">
                             {section.title}
@@ -170,7 +170,7 @@ export default function HomePage() {
                         variant="ghost"
                         size="sm"
                         asChild
-                        className="text-primary hover:text-primary"
+                        className="text-accent-orange hover:text-accent-orange"
                       >
                         <Link href={section.href}>
                           시작하기
@@ -185,7 +185,7 @@ export default function HomePage() {
                         <li key={item.href}>
                           <Link
                             href={item.href}
-                            className="flex items-center gap-2 rounded-md px-3 py-3 min-h-[44px] text-sm hover:bg-muted hover:text-primary active:bg-muted/80 transition-colors"
+                            className="flex items-center gap-2 rounded-md px-3 py-3 min-h-[44px] text-sm hover:bg-muted hover:text-accent-orange active:bg-muted/80 transition-colors"
                           >
                             <ChevronRight className="h-4 w-4 text-muted-foreground" />
                             {item.label}
@@ -255,7 +255,7 @@ export default function HomePage() {
                   </div>
                   <div className="rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4 text-center">
                     <p className="text-sm text-muted-foreground">누적 수익률</p>
-                    <p className="text-2xl font-bold text-primary">
+                    <p className="text-2xl font-bold text-accent-orange">
                       +{latestReturn.cumulativeReturn.toFixed(1)}%
                     </p>
                     <p className="text-xs text-muted-foreground">

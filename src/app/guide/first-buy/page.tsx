@@ -197,7 +197,7 @@ export default function FirstBuyPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <p className="mb-2 flex items-center gap-1 text-sm font-medium text-green-600">
+                    <p className="mb-2 flex items-center gap-1 text-sm font-medium text-accent-orange">
                       <CheckCircle2 className="h-4 w-4" />
                       장점
                     </p>

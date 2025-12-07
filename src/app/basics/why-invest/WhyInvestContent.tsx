@@ -109,7 +109,7 @@ export default function WhyInvestContent() {
                 </div>
                 <div className="rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4 text-center">
                   <p className="text-sm text-muted-foreground">누적 수익률</p>
-                  <p className="text-2xl font-bold text-primary">
+                  <p className="text-2xl font-bold text-accent-orange">
                     {latestReturn ? `+${latestReturn.cumulativeReturn.toFixed(1)}%` : '-'}
                   </p>
                   <p className="text-xs text-muted-foreground">{firstYear}년 이후</p>
@@ -155,8 +155,8 @@ export default function WhyInvestContent() {
               const Icon = benefit.icon
               return (
                 <div key={benefit.title} className="rounded-lg border p-4">
-                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                    <Icon className="h-5 w-5 text-primary" />
+                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-accent-orange/10">
+                    <Icon className="h-5 w-5 text-accent-orange" />
                   </div>
                   <h3 className="mb-2 font-semibold">{benefit.title}</h3>
                   <p className="text-sm text-muted-foreground">{benefit.description}</p>
@@ -164,9 +164,9 @@ export default function WhyInvestContent() {
               )
             })}
           </div>
-          <div className="mt-6 rounded-lg bg-green-50 p-4 dark:bg-green-950/30">
-            <h3 className="mb-2 font-semibold text-green-900 dark:text-green-100">달걀을 한 바구니에 담지 마라</h3>
-            <p className="text-sm text-green-800 dark:text-green-200">
+          <div className="mt-6 rounded-lg bg-accent-orange-muted p-4 border border-accent-orange/20">
+            <h3 className="mb-2 font-semibold text-accent-orange">달걀을 한 바구니에 담지 마라</h3>
+            <p className="text-sm text-muted-foreground">
               개별 주식에 투자하면 해당 기업의 실적에 따라 큰 손실을 볼 수 있습니다.
               하지만 S&P500 ETF는 500개 기업에 분산되어 있어, 한두 기업이 어려움을 겪어도
               전체 포트폴리오에 미치는 영향이 제한적입니다.
@@ -199,8 +199,8 @@ export default function WhyInvestContent() {
                       <span className="font-medium">{sim.single.toLocaleString()}만원</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-primary">복리 효과</span>
-                      <span className="font-bold text-primary">{sim.compound.toLocaleString()}만원</span>
+                      <span className="text-accent-orange">복리 효과</span>
+                      <span className="font-bold text-accent-orange">{sim.compound.toLocaleString()}만원</span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-green-600">차이</span>
@@ -224,7 +224,7 @@ export default function WhyInvestContent() {
           <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-3">
             {investmentQuotes.map((item, index) => (
               <div key={index} className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 p-6">
-                <Quote className="mb-3 h-8 w-8 text-primary/40" />
+                <Quote className="mb-3 h-8 w-8 text-accent-orange/40" />
                 <blockquote className="mb-4 text-lg italic">
                   &quot;{item.quote}&quot;
                 </blockquote>
