@@ -26,6 +26,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
   Shield,
   RefreshCw,
   Info,
@@ -158,7 +164,8 @@ export function KRETFContent() {
           title="주요 ETF 상세 비교"
           description="국내 대표 S&P500 ETF의 핵심 지표를 비교합니다."
         >
-          <div className="overflow-x-auto">
+          {/* Desktop: Table */}
+          <div className="hidden md:block overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -203,6 +210,87 @@ export function KRETFContent() {
                 </TableRow>
               </TableBody>
             </Table>
+          </div>
+
+          {/* Mobile: Cards */}
+          <div className="space-y-4 md:hidden">
+            {/* TIGER ETF Card */}
+            <Card className="ring-2 ring-green-500 bg-green-50/30 dark:bg-green-900/10">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-base flex items-center gap-2">
+                  TIGER 미국S&P500
+                  <span className="text-xs font-normal text-green-600 dark:text-green-400">추천</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="grid grid-cols-2 gap-3 text-sm">
+                <div>
+                  <span className="text-muted-foreground block text-xs">순자산</span>
+                  <span className="font-bold text-green-600 dark:text-green-400">₩9.9조 (1위)</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground block text-xs">총보수</span>
+                  <span className="font-medium">0.0068%</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground block text-xs">실부담비용</span>
+                  <span className="font-medium text-green-600 dark:text-green-400">0.121% (최저)</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground block text-xs">거래량</span>
+                  <span className="font-bold text-green-600 dark:text-green-400">최대</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* KODEX ETF Card */}
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-base">KODEX 미국S&P500</CardTitle>
+              </CardHeader>
+              <CardContent className="grid grid-cols-2 gap-3 text-sm">
+                <div>
+                  <span className="text-muted-foreground block text-xs">순자산</span>
+                  <span className="font-medium">₩5.5조</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground block text-xs">총보수</span>
+                  <span className="font-medium text-green-600 dark:text-green-400">0.0062% (최저)</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground block text-xs">실부담비용</span>
+                  <span className="font-medium">0.162%</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground block text-xs">거래량</span>
+                  <span className="font-medium">양호</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* ACE ETF Card */}
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-base">ACE 미국S&P500</CardTitle>
+              </CardHeader>
+              <CardContent className="grid grid-cols-2 gap-3 text-sm">
+                <div>
+                  <span className="text-muted-foreground block text-xs">순자산</span>
+                  <span className="font-medium">₩2조</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground block text-xs">총보수</span>
+                  <span className="font-medium">0.0068%</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground block text-xs">실부담비용</span>
+                  <span className="font-medium">0.174%</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground block text-xs">거래량</span>
+                  <span className="font-medium">보통</span>
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
           <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
@@ -294,8 +382,8 @@ export function KRETFContent() {
           title="투자 계좌별 세금 비교"
           description="해외 직접투자와 절세 계좌(ISA, 연금)의 세금을 비교합니다."
         >
-          {/* 간소화된 4열 테이블 */}
-          <div className="overflow-x-auto">
+          {/* Desktop: Table */}
+          <div className="hidden md:block overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -337,6 +425,33 @@ export function KRETFContent() {
               </TableBody>
             </Table>
           </div>
+
+          {/* Mobile: Accordion */}
+          <Accordion type="single" collapsible className="md:hidden">
+            {taxComparison.map((row) => (
+              <AccordionItem key={row.category} value={row.category}>
+                <AccordionTrigger className="text-sm font-medium hover:no-underline">
+                  {row.category}
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className="space-y-3 pt-2">
+                    <div className="rounded-lg border p-3">
+                      <div className="text-xs text-muted-foreground mb-1">해외 직접투자</div>
+                      <div className="text-sm">{row.overseas}</div>
+                    </div>
+                    <div className="rounded-lg border border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-900/20 p-3">
+                      <div className="text-xs text-green-600 dark:text-green-400 mb-1">ISA 계좌 (국내 ETF)</div>
+                      <div className="text-sm text-green-700 dark:text-green-300">{row.isa}</div>
+                    </div>
+                    <div className="rounded-lg border border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-900/20 p-3">
+                      <div className="text-xs text-blue-600 dark:text-blue-400 mb-1">연금계좌 (국내 ETF)</div>
+                      <div className="text-sm text-blue-700 dark:text-blue-300">{row.pension}</div>
+                    </div>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
 
           {/* ISA/연금계좌 안내 카드 */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">

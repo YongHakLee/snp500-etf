@@ -141,7 +141,7 @@ export function ExpenseFeeChart() {
       </ChartContainer>
 
       {/* 상세 정보 카드 */}
-      <div className="grid grid-cols-3 gap-3 mt-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
         {feeComparisonData.map((item, index) => (
           <Card key={index} className="border-2" style={{ borderColor: item.color }}>
             <CardContent className="p-3 space-y-1">

@@ -107,7 +107,7 @@ export default function WhatIsSP500Content() {
           ) : (
             <SectorCountChart data={sectorCounts} totalStocks={totalStocks} />
           )}
-          <div className="mt-6 grid gap-2 text-sm grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="mt-6 grid gap-2 text-sm grid-cols-1 min-[400px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {sectorCounts.map((sector) => (
               <div key={sector.sector} className="flex justify-between items-center rounded-lg bg-neutral-100 dark:bg-neutral-800 px-3 py-2">
                 <div className="flex items-center gap-2">

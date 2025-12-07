@@ -38,7 +38,7 @@ export function ExpenseAumComparisonChart({ data }: ExpenseAumComparisonChartPro
       </div>
 
       {/* ETF 카드 그리드 */}
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+      <div className="grid grid-cols-1 min-[400px]:grid-cols-2 gap-3 md:grid-cols-4">
         {data.map((item, index) => {
           // 보수율: 최대값 대비 퍼센트 (바가 길수록 보수율이 높음)
           const expensePercent = (item.expenseRatio / maxExpense) * 100
@@ -53,31 +53,31 @@ export function ExpenseAumComparisonChart({ data }: ExpenseAumComparisonChartPro
                 item.isOptimal && "ring-2 ring-green-500 shadow-md"
               )}
             >
-              <CardContent className="p-4 space-y-3">
+              <CardContent className="p-3 md:p-4 space-y-2 md:space-y-3">
                 {/* 헤더: 티커 + 추천 뱃지 */}
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-lg">{item.ticker}</span>
+                  <span className="font-bold text-base md:text-lg">{item.ticker}</span>
                   {item.isOptimal && (
-                    <span className="inline-flex items-center gap-0.5 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-400">
+                    <span className="inline-flex items-center gap-0.5 rounded-full bg-green-100 px-1.5 md:px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-400">
                       <CheckCircle className="h-3 w-3" />
-                      추천
+                      <span className="hidden min-[400px]:inline">추천</span>
                     </span>
                   )}
                 </div>
                 <div className="text-xs text-muted-foreground truncate">{item.name}</div>
 
                 {/* 보수율 바 */}
-                <div className="space-y-1.5">
-                  <div className="flex justify-between text-sm">
-                    <span className="flex items-center gap-1.5">
+                <div className="space-y-1 md:space-y-1.5">
+                  <div className="flex justify-between text-xs md:text-sm">
+                    <span className="flex items-center gap-1 md:gap-1.5">
                       <span className="h-2 w-2 rounded-full shrink-0" style={{ backgroundColor: EXPENSE_COLOR }} />
                       <span className="text-muted-foreground">보수율</span>
                     </span>
-                    <span className="font-mono font-semibold">{item.expenseRatio.toFixed(4)}%</span>
+                    <span className="font-mono font-semibold">{item.expenseRatio.toFixed(3)}%</span>
                   </div>
                   <Progress
                     value={expensePercent}
-                    className="h-2 bg-muted [&>div]:transition-all"
+                    className="h-1.5 md:h-2 bg-muted [&>div]:transition-all"
                     style={{
                       ['--progress-color' as string]: EXPENSE_COLOR
                     }}
@@ -85,9 +85,9 @@ export function ExpenseAumComparisonChart({ data }: ExpenseAumComparisonChartPro
                 </div>
 
                 {/* 순자산 바 */}
-                <div className="space-y-1.5">
-                  <div className="flex justify-between text-sm">
-                    <span className="flex items-center gap-1.5">
+                <div className="space-y-1 md:space-y-1.5">
+                  <div className="flex justify-between text-xs md:text-sm">
+                    <span className="flex items-center gap-1 md:gap-1.5">
                       <span className="h-2 w-2 rounded-full shrink-0" style={{ backgroundColor: AUM_COLOR }} />
                       <span className="text-muted-foreground">순자산</span>
                     </span>
@@ -95,7 +95,7 @@ export function ExpenseAumComparisonChart({ data }: ExpenseAumComparisonChartPro
                   </div>
                   <Progress
                     value={aumPercent}
-                    className="h-2 bg-muted [&>div]:transition-all"
+                    className="h-1.5 md:h-2 bg-muted [&>div]:transition-all"
                     style={{
                       ['--progress-color' as string]: AUM_COLOR
                     }}
@@ -115,7 +115,7 @@ export function ExpenseAumComparisonChart({ data }: ExpenseAumComparisonChartPro
       </div>
 
       {/* 차트 하단 설명 */}
-      <div className="mt-4 grid gap-3 text-xs text-muted-foreground md:grid-cols-2">
+      <div className="mt-4 grid gap-3 text-xs text-muted-foreground grid-cols-1 md:grid-cols-2">
         <div className="rounded-lg border p-3">
           <div className="flex items-center gap-2 font-medium text-foreground">
             <span className="h-2 w-2 rounded-full" style={{ backgroundColor: EXPENSE_COLOR }} />

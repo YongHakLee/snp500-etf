@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { useMemo } from 'react'
 import {
   ColumnDef,
   SortingState,
@@ -9,9 +10,11 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { ArrowUpDown, Check, X } from 'lucide-react'
+import { ArrowUpDown, Check, X, CheckCircle } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 import {
   Table,
   TableBody,
@@ -313,6 +316,132 @@ const krEtfColumns: ColumnDef<KREtf>[] = [
   },
 ]
 
+// 미국 ETF 모바일 카드 컴포넌트
+function USETFMobileCard({ etf, isHighlighted }: { etf: USEtf; isHighlighted: boolean }) {
+  return (
+    <Card className={cn(
+      "transition-all",
+      isHighlighted && "ring-2 ring-yellow-400 bg-yellow-50/50 dark:bg-yellow-900/20"
+    )}>
+      <CardHeader className="pb-2">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <CardTitle className="text-lg">{etf.ticker}</CardTitle>
+            {isHighlighted && (
+              <Badge variant="secondary" className="text-xs bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
+                <CheckCircle className="h-3 w-3 mr-0.5" />
+                추천
+              </Badge>
+            )}
+          </div>
+          {etf.return5Y != null && (
+            <Badge variant="outline" className="text-green-600 dark:text-green-400 border-green-300">
+              +{etf.return5Y.toFixed(2)}%/년
+            </Badge>
+          )}
+        </div>
+        <CardDescription className="text-xs">{etf.name}</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-3 text-sm">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+          <div>
+            <span className="text-muted-foreground text-xs block">운용사</span>
+            <span className="font-medium">{etf.provider}</span>
+          </div>
+          <div>
+            <span className="text-muted-foreground text-xs block">보수율</span>
+            <span className="font-medium font-mono">{etf.expenseRatio.toFixed(4)}%</span>
+          </div>
+          <div>
+            <span className="text-muted-foreground text-xs block">순자산</span>
+            <span className="font-medium">{formatAumToKorean(etf.aum)}</span>
+          </div>
+          <div>
+            <span className="text-muted-foreground text-xs block">5년 누적</span>
+            <span className="font-medium text-green-600 dark:text-green-400">
+              {etf.return5YCumulative != null ? `+${etf.return5YCumulative.toFixed(1)}%` : '-'}
+            </span>
+          </div>
+        </div>
+        <div className="pt-2 border-t text-xs text-muted-foreground">
+          {etf.targetAudience}
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+
+// 한국 ETF 모바일 카드 컴포넌트
+function KRETFMobileCard({ etf, isHighlighted }: { etf: KREtf; isHighlighted: boolean }) {
+  const cagr = etf.returnCAGR ?? etf.return5Y
+  const cumulative = etf.returnCumulative ?? etf.return5YCumulative
+
+  return (
+    <Card className={cn(
+      "transition-all",
+      isHighlighted && "ring-2 ring-yellow-400 bg-yellow-50/50 dark:bg-yellow-900/20"
+    )}>
+      <CardHeader className="pb-2">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <CardTitle className="text-lg">{etf.name.split(' ')[0]}</CardTitle>
+            {isHighlighted && (
+              <Badge variant="secondary" className="text-xs bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
+                <CheckCircle className="h-3 w-3 mr-0.5" />
+                추천
+              </Badge>
+            )}
+          </div>
+          <div className="flex gap-1">
+            {etf.hedged && (
+              <Badge variant="secondary" className="text-xs">환헤지</Badge>
+            )}
+            {cagr != null && (
+              <Badge variant="outline" className="text-green-600 dark:text-green-400 border-green-300">
+                +{cagr.toFixed(2)}%/년
+              </Badge>
+            )}
+          </div>
+        </div>
+        <CardDescription className="text-xs">
+          {etf.ticker} · {etf.provider}
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-2 text-sm">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+          <div>
+            <span className="text-muted-foreground text-xs block">보수율</span>
+            <span className="font-medium font-mono">{etf.expenseRatio.toFixed(4)}%</span>
+          </div>
+          <div>
+            <span className="text-muted-foreground text-xs block">순자산</span>
+            <span className="font-medium">{formatKRAumToKorean(etf.aum)}</span>
+          </div>
+          <div>
+            <span className="text-muted-foreground text-xs block">누적수익률</span>
+            <span className="font-medium text-green-600 dark:text-green-400">
+              {cumulative != null ? `+${cumulative.toFixed(1)}%` : '-'}
+              {etf.returnPeriodLabel && (
+                <span className="text-muted-foreground text-xs ml-1">({etf.returnPeriodLabel})</span>
+              )}
+            </span>
+          </div>
+          <div>
+            <span className="text-muted-foreground text-xs block">환헤지</span>
+            <span className="font-medium">
+              {etf.hedged ? (
+                <span className="text-blue-600 dark:text-blue-400">적용</span>
+              ) : (
+                <span className="text-muted-foreground">미적용</span>
+              )}
+            </span>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+
 // Props 타입 정의
 interface USEtfTableProps {
   data: USEtf[]
@@ -351,58 +480,85 @@ export function ETFComparisonTable({
     },
   })
 
-  return (
-    <div className="rounded-md border">
-      <Table>
-        <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <TableHead key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                </TableHead>
-              ))}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => {
-              const ticker = (row.original as USEtf | KREtf).ticker
-              const isHighlighted = highlightTickers.includes(ticker)
+  // 모바일용 정렬된 데이터: 추천 ETF 상단 고정, 나머지 순자산 내림차순
+  const sortedDataForMobile = useMemo(() => {
+    const highlighted = data.filter(etf => highlightTickers.includes(etf.ticker))
+    const others = data
+      .filter(etf => !highlightTickers.includes(etf.ticker))
+      .sort((a, b) => {
+        // 순자산 내림차순
+        const aumA = type === 'us' ? parseAum((a as USEtf).aum) : (a as KREtf).aum
+        const aumB = type === 'us' ? parseAum((b as USEtf).aum) : (b as KREtf).aum
+        return aumB - aumA
+      })
+    return [...highlighted, ...others]
+  }, [data, highlightTickers, type])
 
-              return (
-                <TableRow
-                  key={row.id}
-                  className={cn(
-                    isHighlighted && 'bg-yellow-50 dark:bg-yellow-900/20'
-                  )}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              )
-            })
-          ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                데이터가 없습니다.
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    </div>
+  return (
+    <>
+      {/* Desktop: Table */}
+      <div className="hidden md:block rounded-md border">
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </TableHead>
+                ))}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row) => {
+                const ticker = (row.original as USEtf | KREtf).ticker
+                const isHighlighted = highlightTickers.includes(ticker)
+
+                return (
+                  <TableRow
+                    key={row.id}
+                    className={cn(
+                      isHighlighted && 'bg-yellow-50 dark:bg-yellow-900/20'
+                    )}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                )
+              })
+            ) : (
+              <TableRow>
+                <TableCell colSpan={columns.length} className="h-24 text-center">
+                  데이터가 없습니다.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+
+      {/* Mobile: Cards (추천순 고정, 정렬 UI 없음) */}
+      <div className="space-y-3 md:hidden">
+        {sortedDataForMobile.map((etf) => {
+          const isHighlighted = highlightTickers.includes(etf.ticker)
+          return type === 'us'
+            ? <USETFMobileCard key={etf.ticker} etf={etf as USEtf} isHighlighted={isHighlighted} />
+            : <KRETFMobileCard key={etf.ticker} etf={etf as KREtf} isHighlighted={isHighlighted} />
+        })}
+      </div>
+    </>
   )
 }
