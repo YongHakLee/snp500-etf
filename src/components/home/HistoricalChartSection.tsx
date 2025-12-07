@@ -8,7 +8,7 @@ import type { HistoricalReturn } from '@/types'
 const HistoricalReturnChart = dynamic(
   () => import('@/components/charts/HistoricalReturnChart').then(mod => ({ default: mod.HistoricalReturnChart })),
   {
-    loading: () => <Skeleton className="h-[180px] w-full sm:h-[200px]" />,
+    loading: () => <Skeleton className="h-[250px] w-full sm:h-[300px]" />,
     ssr: false
   }
 )

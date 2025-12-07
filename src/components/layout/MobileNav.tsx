@@ -105,7 +105,7 @@ export function MobileNav() {
           <span className="sr-only">메뉴 열기</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-[300px] overflow-y-auto">
+      <SheetContent side="left" className="w-[min(300px,85vw)] overflow-y-auto">
         <SheetHeader>
           <SheetTitle>메뉴</SheetTitle>
         </SheetHeader>

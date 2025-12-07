@@ -229,10 +229,7 @@ export default function AccountPage() {
                       <h4 className="mb-2 text-sm font-medium">주요 혜택</h4>
                       <ul className="space-y-2 text-sm text-muted-foreground">
                         {account.benefits.map((benefit) => (
-                          <li
-                            key={benefit}
-                            className="flex items-start gap-2"
-                          >
+                          <li key={benefit} className="flex items-start gap-2">
                             <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-green-500" />
                             <span>{benefit}</span>
                           </li>
@@ -271,26 +268,6 @@ export default function AccountPage() {
                 </Card>
               );
             })}
-          </div>
-        </SectionCard>
-
-        {/* 계좌 개설 체크리스트 */}
-        <SectionCard
-          title="계좌 개설 체크리스트"
-          description="계좌 개설 전 아래 항목을 확인하세요."
-        >
-          <div className="space-y-2">
-            {checklistItems.map((item, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-3 rounded-lg border p-4"
-              >
-                <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
-                  <CheckCircle2 className="h-4 w-4 text-green-600 dark:text-green-400" />
-                </div>
-                <span className="text-sm font-medium">{item}</span>
-              </div>
-            ))}
           </div>
         </SectionCard>
       </div>

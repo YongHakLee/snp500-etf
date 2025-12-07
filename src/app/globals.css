@@ -49,6 +49,9 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* xs 브레이크포인트 (375px) */
+  --breakpoint-xs: 375px;
 }
 
 :root {
@@ -134,5 +137,18 @@
   .container {
     @apply mx-auto w-full px-4 sm:px-6 lg:px-8;
     max-width: 1280px;
+  }
+}
+
+/* 모바일 터치 최적화 */
+@layer base {
+  /* 터치 하이라이트 제거 - 커스텀 피드백 사용 */
+  button, a, [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* 터치 스크롤 성능 개선 */
+  .container {
+    -webkit-overflow-scrolling: touch;
   }
 }

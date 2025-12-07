@@ -104,7 +104,7 @@ export default function HomePage() {
   return (
     <div className="flex flex-col">
       {/* Section 1: 히어로 섹션 */}
-      <section className="py-16 md:py-24">
+      <section className="py-12 md:py-24">
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
             <Badge variant="secondary" className="mb-4">
@@ -185,7 +185,7 @@ export default function HomePage() {
                         <li key={item.href}>
                           <Link
                             href={item.href}
-                            className="flex items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-muted hover:text-primary transition-colors"
+                            className="flex items-center gap-2 rounded-md px-3 py-3 min-h-[44px] text-sm hover:bg-muted hover:text-primary active:bg-muted/80 transition-colors"
                           >
                             <ChevronRight className="h-4 w-4 text-muted-foreground" />
                             {item.label}
@@ -216,7 +216,7 @@ export default function HomePage() {
                       지난 {summary.totalYears}년간 S&P500의 연간 및 누적 수익률
                     </CardDescription>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
                     <TimeRangeSelector
                       value={timeRange}
                       onChange={setTimeRange}

@@ -36,7 +36,7 @@ export function QuickNavigation() {
                 variant="outline"
                 size="lg"
                 asChild
-                className="h-auto py-3 px-4 md:px-6"
+                className="h-auto min-h-[48px] py-3 px-4 md:px-6"
               >
                 <Link href={link.href} className="flex items-center gap-2 md:gap-3">
                   <Icon className="h-5 w-5 text-primary" />
