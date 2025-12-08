@@ -178,7 +178,7 @@ export function KRETFContent() {
               <TableBody>
                 <TableRow>
                   <TableCell className="font-medium">순자산</TableCell>
-                  <TableCell className="text-green-600 dark:text-green-400 font-bold">
+                  <TableCell className="text-accent-orange font-bold">
                     ₩9.9조 (1위)
                   </TableCell>
                   <TableCell>₩5.5조</TableCell>
@@ -187,14 +187,14 @@ export function KRETFContent() {
                 <TableRow>
                   <TableCell className="font-medium">총보수</TableCell>
                   <TableCell>0.0068%</TableCell>
-                  <TableCell className="text-green-600 dark:text-green-400">
+                  <TableCell className="text-accent-orange">
                     0.0062% (최저)
                   </TableCell>
                   <TableCell>0.0068%</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className="font-medium">실부담비용</TableCell>
-                  <TableCell className="text-green-600 dark:text-green-400">
+                  <TableCell className="text-accent-orange">
                     0.121% (최저)
                   </TableCell>
                   <TableCell>0.162%</TableCell>
@@ -202,7 +202,7 @@ export function KRETFContent() {
                 </TableRow>
                 <TableRow>
                   <TableCell className="font-medium">거래량</TableCell>
-                  <TableCell className="text-green-600 dark:text-green-400 font-bold">
+                  <TableCell className="text-accent-orange font-bold">
                     최대 (유동성 우수)
                   </TableCell>
                   <TableCell>양호</TableCell>
@@ -215,17 +215,17 @@ export function KRETFContent() {
           {/* Mobile: Cards */}
           <div className="space-y-4 md:hidden">
             {/* TIGER ETF Card */}
-            <Card className="ring-2 ring-green-500 bg-green-50/30 dark:bg-green-900/10">
+            <Card className="ring-2 ring-accent-orange bg-accent-orange-muted">
               <CardHeader className="pb-2">
                 <CardTitle className="text-base flex items-center gap-2">
                   TIGER 미국S&P500
-                  <span className="text-xs font-normal text-green-600 dark:text-green-400">추천</span>
+                  <span className="text-xs font-normal text-accent-orange">추천</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="grid grid-cols-2 gap-3 text-sm">
                 <div>
                   <span className="text-muted-foreground block text-xs">순자산</span>
-                  <span className="font-bold text-green-600 dark:text-green-400">₩9.9조 (1위)</span>
+                  <span className="font-bold text-accent-orange">₩9.9조 (1위)</span>
                 </div>
                 <div>
                   <span className="text-muted-foreground block text-xs">총보수</span>
@@ -233,11 +233,11 @@ export function KRETFContent() {
                 </div>
                 <div>
                   <span className="text-muted-foreground block text-xs">실부담비용</span>
-                  <span className="font-medium text-green-600 dark:text-green-400">0.121% (최저)</span>
+                  <span className="font-medium text-accent-orange">0.121% (최저)</span>
                 </div>
                 <div>
                   <span className="text-muted-foreground block text-xs">거래량</span>
-                  <span className="font-bold text-green-600 dark:text-green-400">최대</span>
+                  <span className="font-bold text-accent-orange">최대</span>
                 </div>
               </CardContent>
             </Card>
@@ -254,7 +254,7 @@ export function KRETFContent() {
                 </div>
                 <div>
                   <span className="text-muted-foreground block text-xs">총보수</span>
-                  <span className="font-medium text-green-600 dark:text-green-400">0.0062% (최저)</span>
+                  <span className="font-medium text-accent-orange">0.0062% (최저)</span>
                 </div>
                 <div>
                   <span className="text-muted-foreground block text-xs">실부담비용</span>
@@ -293,7 +293,7 @@ export function KRETFContent() {
             </Card>
           </div>
 
-          <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+          <div className="mt-4 p-4 bg-accent-orange-muted rounded-lg border border-accent-orange/30">
             <h3 className="font-medium flex items-center gap-2">
               TIGER 미국S&P500이 인기 있는 이유
             </h3>
@@ -389,7 +389,7 @@ export function KRETFContent() {
                 <TableRow>
                   <TableHead className="w-[120px]">구분</TableHead>
                   <TableHead>해외 직접투자</TableHead>
-                  <TableHead className="bg-blue-50/50 dark:bg-blue-900/20">
+                  <TableHead className="bg-accent-orange/10">
                     <div className="flex flex-col">
                       <span>ISA 계좌</span>
                       <span className="text-xs font-normal text-muted-foreground">
@@ -397,7 +397,7 @@ export function KRETFContent() {
                       </span>
                     </div>
                   </TableHead>
-                  <TableHead className="bg-blue-50/50 dark:bg-blue-900/20">
+                  <TableHead className="bg-accent-orange/10">
                     <div className="flex flex-col">
                       <span>연금계좌</span>
                       <span className="text-xs font-normal text-muted-foreground">
@@ -414,10 +414,10 @@ export function KRETFContent() {
                       {row.category}
                     </TableCell>
                     <TableCell className="text-sm">{row.overseas}</TableCell>
-                    <TableCell className="text-sm text-green-600 dark:text-green-400 bg-blue-50/30 dark:bg-blue-900/10">
+                    <TableCell className="text-sm text-accent-orange bg-accent-orange/5">
                       {row.isa}
                     </TableCell>
-                    <TableCell className="text-sm text-blue-600 dark:text-blue-400 bg-blue-50/30 dark:bg-blue-900/10">
+                    <TableCell className="text-sm text-accent-orange bg-accent-orange/5">
                       {row.pension}
                     </TableCell>
                   </TableRow>
@@ -439,13 +439,13 @@ export function KRETFContent() {
                       <div className="text-xs text-muted-foreground mb-1">해외 직접투자</div>
                       <div className="text-sm">{row.overseas}</div>
                     </div>
-                    <div className="rounded-lg border border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-900/20 p-3">
-                      <div className="text-xs text-green-600 dark:text-green-400 mb-1">ISA 계좌 (국내 ETF)</div>
-                      <div className="text-sm text-green-700 dark:text-green-300">{row.isa}</div>
+                    <div className="rounded-lg border border-accent-orange/30 bg-accent-orange-muted p-3">
+                      <div className="text-xs text-accent-orange mb-1">ISA 계좌 (국내 ETF)</div>
+                      <div className="text-sm text-accent-orange">{row.isa}</div>
                     </div>
-                    <div className="rounded-lg border border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-900/20 p-3">
-                      <div className="text-xs text-blue-600 dark:text-blue-400 mb-1">연금계좌 (국내 ETF)</div>
-                      <div className="text-sm text-blue-700 dark:text-blue-300">{row.pension}</div>
+                    <div className="rounded-lg border border-accent-orange/30 bg-accent-orange-muted p-3">
+                      <div className="text-xs text-accent-orange mb-1">연금계좌 (국내 ETF)</div>
+                      <div className="text-sm text-accent-orange">{row.pension}</div>
                     </div>
                   </div>
                 </AccordionContent>
@@ -459,7 +459,7 @@ export function KRETFContent() {
             <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="flex items-center gap-2 text-base">
-                  <Landmark className="h-5 w-5 text-green-600 dark:text-green-400" />
+                  <Landmark className="h-5 w-5 text-accent-orange" />
                   ISA 계좌
                 </CardTitle>
                 <CardDescription>
@@ -486,7 +486,7 @@ export function KRETFContent() {
             <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="flex items-center gap-2 text-base">
-                  <PiggyBank className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                  <PiggyBank className="h-5 w-5 text-accent-orange" />
                   연금계좌
                 </CardTitle>
                 <CardDescription>

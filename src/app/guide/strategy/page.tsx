@@ -120,9 +120,9 @@ export default function StrategyPage() {
           title="적립식 투자 (DCA)"
           description="Dollar Cost Averaging - 일정 금액을 정기적으로 투자하는 전략입니다."
         >
-          <div className="mb-6 rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4">
+          <div className="mb-6 rounded-lg bg-accent-orange-muted border border-accent-orange/20 p-4">
             <div className="flex items-center gap-2">
-              <Calendar className="h-5 w-5 text-primary" />
+              <Calendar className="h-5 w-5 text-accent-orange" />
               <span className="font-medium">적립식 투자 예시</span>
             </div>
             <p className="mt-2 text-sm text-muted-foreground">
@@ -165,7 +165,7 @@ export default function StrategyPage() {
             <Card>
               <CardHeader>
                 <div className="flex items-center gap-2">
-                  <TrendingUp className="h-5 w-5 text-primary" />
+                  <TrendingUp className="h-5 w-5 text-accent-orange" />
                   <CardTitle className="text-lg">거치식 (Lump Sum)</CardTitle>
                 </div>
                 <p className="text-sm text-muted-foreground">목돈을 한 번에 투자</p>
@@ -196,11 +196,11 @@ export default function StrategyPage() {
               </CardContent>
             </Card>
 
-            <Card className="border-primary">
+            <Card className="border-accent-orange">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Calendar className="h-5 w-5 text-primary" />
+                    <Calendar className="h-5 w-5 text-accent-orange" />
                     <CardTitle className="text-lg">적립식 (DCA)</CardTitle>
                   </div>
                   <Badge variant="default">초보자 추천</Badge>
@@ -241,7 +241,7 @@ export default function StrategyPage() {
           description="월 수입을 합리적으로 배분하는 방법입니다."
         >
           <div className="mb-6 flex items-center gap-2">
-            <PieChart className="h-5 w-5 text-primary" />
+            <PieChart className="h-5 w-5 text-accent-orange" />
             <span className="text-sm text-muted-foreground">
               월 수입을 필수 지출, 선택 지출, 저축/투자로 나누어 관리하세요.
             </span>
@@ -277,7 +277,7 @@ export default function StrategyPage() {
             ))}
           </div>
 
-          <div className="mt-6 rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4">
+          <div className="mt-6 rounded-lg bg-accent-orange-muted border border-accent-orange/20 p-4">
             <h3 className="mb-2 font-medium">예시: 월 수입 300만원</h3>
             <div className="grid gap-2 text-sm md:grid-cols-3">
               <div>필수 지출: <strong>150만원</strong></div>
@@ -292,8 +292,8 @@ export default function StrategyPage() {
           title="리밸런싱"
           description="자산 배분 비율을 원래 목표대로 조정하는 것입니다."
         >
-          <div className="mb-6 flex items-start gap-3 rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4">
-            <RefreshCw className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+          <div className="mb-6 flex items-start gap-3 rounded-lg bg-accent-orange-muted border border-accent-orange/20 p-4">
+            <RefreshCw className="mt-0.5 h-5 w-5 shrink-0 text-accent-orange" />
             <div>
               <h3 className="font-medium">리밸런싱이란?</h3>
               <p className="text-sm text-muted-foreground">
@@ -312,7 +312,7 @@ export default function StrategyPage() {
                   key={index}
                   className="flex items-center gap-3 rounded-lg border p-3"
                 >
-                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-medium text-primary">
+                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent-orange/10 text-xs font-medium text-accent-orange">
                     {index + 1}
                   </div>
                   <span className="text-sm">{timing}</span>

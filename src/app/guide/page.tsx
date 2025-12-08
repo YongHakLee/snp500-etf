@@ -61,7 +61,7 @@ export default function GuidePage() {
       />
 
       {/* 소개 섹션 */}
-      <div className="mb-8 rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-6">
+      <div className="mb-8 rounded-lg bg-accent-orange-muted border border-accent-orange/20 p-6">
         <h2 className="mb-2 text-lg font-semibold">4단계로 시작하는 S&P500 ETF 투자</h2>
         <p className="text-muted-foreground">
           주식투자가 처음이신가요? 걱정하지 마세요. 아래 4단계를 차근차근 따라오시면
@@ -75,11 +75,11 @@ export default function GuidePage() {
           const Icon = guide.icon
           return (
             <Link key={guide.href} href={guide.href} className="group">
-              <Card className="h-full transition-colors hover:border-primary">
+              <Card className="h-full transition-colors hover:border-accent-orange">
                 <CardHeader>
                   <div className="flex items-center gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                      <Icon className="h-6 w-6 text-primary" />
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-accent-orange/10">
+                      <Icon className="h-6 w-6 text-accent-orange" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
@@ -96,7 +96,7 @@ export default function GuidePage() {
                   <CardDescription className="mt-2">{guide.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <span className="text-sm text-primary">자세히 보기</span>
+                  <span className="text-sm text-accent-orange">자세히 보기</span>
                 </CardContent>
               </Card>
             </Link>

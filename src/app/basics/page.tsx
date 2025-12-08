@@ -54,10 +54,10 @@ export default function BasicsPage() {
           const Icon = page.icon
           return (
             <Link key={page.href} href={page.href} className="group">
-              <Card className="h-full transition-colors hover:border-primary">
+              <Card className="h-full transition-colors hover:border-accent-orange">
                 <CardHeader>
-                  <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                    <Icon className="h-6 w-6 text-primary" />
+                  <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-lg bg-accent-orange/10">
+                    <Icon className="h-6 w-6 text-accent-orange" />
                   </div>
                   <CardTitle className="flex items-center justify-between">
                     {page.title}
@@ -66,7 +66,7 @@ export default function BasicsPage() {
                   <CardDescription>{page.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <span className="text-sm text-primary">자세히 보기</span>
+                  <span className="text-sm text-accent-orange">자세히 보기</span>
                 </CardContent>
               </Card>
             </Link>

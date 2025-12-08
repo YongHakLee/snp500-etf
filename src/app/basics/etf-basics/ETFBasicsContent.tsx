@@ -228,8 +228,8 @@ export function ETFBasicsContent() {
             </AlertDescription>
           </Alert>
 
-          <div className="rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4">
-            <h3 className="mb-2 font-semibold">ETF의 핵심 특징</h3>
+          <div className="rounded-lg bg-accent-orange-muted border border-accent-orange/20 p-4">
+            <h3 className="mb-2 font-semibold text-accent-orange">ETF의 핵심 특징</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
                 <strong className="text-foreground">지수 추종:</strong> S&P500, KOSPI200 등 특정 지수의 수익률을 그대로 따라갑니다.
@@ -322,12 +322,12 @@ export function ETFBasicsContent() {
               const Icon = item.icon
               return (
                 <div key={item.title} className="rounded-lg border bg-card p-5">
-                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                    <Icon className="h-6 w-6 text-primary" />
+                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-accent-orange/10">
+                    <Icon className="h-6 w-6 text-accent-orange" />
                   </div>
                   <h3 className="mb-2 font-semibold text-lg">{item.title}</h3>
                   <p className="text-sm text-muted-foreground mb-3">{item.description}</p>
-                  <div className="rounded bg-primary/5 px-3 py-2 text-sm font-medium text-primary">
+                  <div className="rounded bg-accent-orange/5 px-3 py-2 text-sm font-medium text-accent-orange">
                     {item.highlight}
                   </div>
                 </div>
@@ -356,8 +356,8 @@ export function ETFBasicsContent() {
                       const Icon = item.icon
                       return (
                         <div key={item.title} className="rounded-lg border p-4 bg-muted/30">
-                          <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
-                            <Icon className="h-4 w-4 text-primary" />
+                          <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-lg bg-accent-orange/10">
+                            <Icon className="h-4 w-4 text-accent-orange" />
                           </div>
                           <h4 className="mb-1 font-medium text-sm">{item.title}</h4>
                           <p className="text-xs text-muted-foreground">{item.description}</p>

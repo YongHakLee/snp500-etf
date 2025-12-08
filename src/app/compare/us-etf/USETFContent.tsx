@@ -234,19 +234,19 @@ export function USETFContent() {
           <LazyExpenseAumChart data={expenseAumChartData} />
 
           {/* 추천 안내 박스 */}
-          <div className="mt-6 rounded-lg border border-orange-200 dark:border-orange-800 bg-orange-50/50 dark:bg-orange-900/10 p-4">
+          <div className="mt-6 rounded-lg border border-accent-orange/30 bg-accent-orange-muted p-4">
             <div className="flex items-start gap-3">
-              <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-orange-600 dark:text-orange-400" />
+              <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-accent-orange" />
               <div>
-                <h3 className="font-semibold text-orange-700 dark:text-orange-300">
+                <h3 className="font-semibold text-accent-orange">
                   장기투자에 최적인 ETF 선택 기준
                 </h3>
-                <p className="mt-1 text-sm text-orange-600 dark:text-orange-400">
+                <p className="mt-1 text-sm text-accent-orange">
                   <strong>낮은 보수율 + 큰 순자산 규모</strong>가 이상적입니다.
                   <strong className="ml-1">VOO</strong>는 0.03%의 낮은 보수율과
                   1.4조 달러의 압도적인 순자산으로 장기 투자자에게 최적입니다.
                 </p>
-                <p className="mt-2 text-xs text-orange-500 dark:text-orange-500">
+                <p className="mt-2 text-xs text-accent-orange/70">
                   * 1억원을 10년간 투자할 경우, SPY(0.0945%) 대비 VOO(0.03%)로
                   약 65만원 이상의 비용을 절감할 수 있습니다.
                 </p>

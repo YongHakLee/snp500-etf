@@ -25,7 +25,7 @@ const comparePages = [
   {
     title: "미국 ETF",
     description:
-      "SPY, VOO, IVV, SPLG 등 미국 상장 S&P500 ETF를 보수율, 거래량, 수익률 기준으로 비교합니다.",
+      "SPY, VOO, IVV, SPYM 등 미국 상장 S&P500 ETF를 보수율, 거래량, 수익률 기준으로 비교합니다.",
     href: "/compare/us-etf",
     icon: DollarSign,
     features: ["낮은 보수율", "높은 유동성", "달러 자산"],
@@ -54,10 +54,10 @@ export default function ComparePage() {
           const Icon = page.icon;
           return (
             <Link key={page.href} href={page.href} className="group">
-              <Card className="h-full transition-colors hover:border-primary">
+              <Card className="h-full transition-colors hover:border-accent-orange">
                 <CardHeader>
-                  <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                    <Icon className="h-6 w-6 text-primary" />
+                  <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-lg bg-accent-orange/10">
+                    <Icon className="h-6 w-6 text-accent-orange" />
                   </div>
                   <CardTitle className="flex items-center justify-between">
                     {page.title}
@@ -76,7 +76,7 @@ export default function ComparePage() {
                       </span>
                     ))}
                   </div>
-                  <span className="mt-4 block text-sm text-primary">
+                  <span className="mt-4 block text-sm text-accent-orange">
                     자세히 보기
                   </span>
                 </CardContent>
@@ -93,7 +93,7 @@ export default function ComparePage() {
         </h2>
         <div className="grid gap-4 md:grid-cols-2">
           <div>
-            <h3 className="font-medium text-primary">미국 ETF 추천 대상</h3>
+            <h3 className="font-medium text-accent-orange">미국 ETF 추천 대상</h3>
             <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
               <li>• 장기 투자 (10년 이상) 계획인 분</li>
               <li>• 최저 보수율을 원하는 분</li>
@@ -102,7 +102,7 @@ export default function ComparePage() {
             </ul>
           </div>
           <div>
-            <h3 className="font-medium text-primary">한국 ETF 추천 대상</h3>
+            <h3 className="font-medium text-accent-orange">한국 ETF 추천 대상</h3>
             <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
               <li>• 연금계좌/ISA로 절세 혜택을 받고 싶은 분</li>
               <li>• 원화로 간편하게 거래하고 싶은 분</li>

@@ -176,7 +176,7 @@ export default function TaxPage() {
         >
           <div className="rounded-lg border p-6">
             <h3 className="mb-4 flex items-center gap-2 font-medium">
-              <Calculator className="h-5 w-5 text-primary" />
+              <Calculator className="h-5 w-5 text-accent-orange" />
               미국 ETF 양도소득세 계산 예시
             </h3>
 
@@ -216,7 +216,7 @@ export default function TaxPage() {
                 <div className="border-t pt-3">
                   <div className="flex items-center justify-between">
                     <span className="font-medium">납부 세금</span>
-                    <span className="text-xl font-bold text-primary">{taxCalculation.tax.toLocaleString()}원</span>
+                    <span className="text-xl font-bold text-accent-orange">{taxCalculation.tax.toLocaleString()}원</span>
                   </div>
                 </div>
               </div>
@@ -257,8 +257,8 @@ export default function TaxPage() {
                 <Card key={strategy.title}>
                   <CardHeader>
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                        <Icon className="h-5 w-5 text-primary" />
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent-orange/10">
+                        <Icon className="h-5 w-5 text-accent-orange" />
                       </div>
                       <div>
                         <CardTitle className="text-lg">{strategy.title}</CardTitle>
@@ -299,7 +299,7 @@ export default function TaxPage() {
                   { step: 4, title: '납부 기한', content: '5월 31일까지 (분납 가능)' },
                 ].map((item) => (
                   <div key={item.step} className="flex items-start gap-4">
-                    <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
+                    <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent-orange text-xs font-bold text-accent-orange-foreground">
                       {item.step}
                     </div>
                     <div>

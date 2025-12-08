@@ -145,7 +145,7 @@ export default function FirstBuyPage() {
               <Card key={method.title}>
                 <CardHeader>
                   <div className="flex items-center gap-2">
-                    <Search className="h-5 w-5 text-primary" />
+                    <Search className="h-5 w-5 text-accent-orange" />
                     <CardTitle className="text-lg">{method.title}</CardTitle>
                   </div>
                 </CardHeader>
@@ -182,7 +182,7 @@ export default function FirstBuyPage() {
             {orderTypes.map((order) => (
               <Card
                 key={order.type}
-                className={order.recommended ? "border-primary" : ""}
+                className={order.recommended ? "border-accent-orange" : ""}
               >
                 <CardHeader>
                   <div className="flex items-center justify-between">

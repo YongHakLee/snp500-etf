@@ -183,7 +183,7 @@ export default function AccountPage() {
                 key={step.step}
                 className="flex items-start gap-4 rounded-lg border p-4"
               >
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-orange text-sm font-bold text-accent-orange-foreground">
                   {step.step}
                 </div>
                 <div>
@@ -246,7 +246,7 @@ export default function AccountPage() {
                         {account.conditions.map((condition) => (
                           <li key={condition.text}>• {condition.text}</li>
                         ))}
-                        <li className="font-medium text-orange-600 dark:text-orange-400">
+                        <li className="font-medium text-accent-orange">
                           • {account.importantCondition}
                         </li>
                       </ul>

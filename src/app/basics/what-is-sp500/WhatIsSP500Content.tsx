@@ -54,8 +54,8 @@ export default function WhatIsSP500Content() {
               Standard & Poor&apos;s가 선정한 미국 증시에 상장된 시가총액 상위 500개 대형 기업의
               주가를 시가총액 가중 방식으로 산출한 주가지수입니다.
             </p>
-            <div className="rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-4">
-              <h3 className="mb-2 font-semibold">주요 연혁</h3>
+            <div className="rounded-lg bg-accent-orange-muted border border-accent-orange/20 p-4">
+              <h3 className="mb-2 font-semibold text-accent-orange">주요 연혁</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><strong className="text-foreground">1923년:</strong> Standard Statistics Company가 233개 종목으로 첫 지수 발표</li>
                 <li><strong className="text-foreground">1957년:</strong> 500개 종목으로 확대되어 현재의 S&P500 탄생</li>
@@ -80,7 +80,7 @@ export default function WhatIsSP500Content() {
                 key={criteria.title}
                 className="flex items-start gap-3 rounded-lg border p-4"
               >
-                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-green-500" />
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-accent-orange" />
                 <div>
                   <h3 className="font-medium">{criteria.title}</h3>
                   <p className="text-sm text-muted-foreground">{criteria.description}</p>
