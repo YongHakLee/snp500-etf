@@ -115,9 +115,9 @@ export default function HomePage() {
               <br />
               <span className="text-accent-orange">쉽게 시작하세요</span>
             </h1>
-            <p className="mt-4 text-base text-muted-foreground sm:mt-6 sm:text-lg md:text-xl">
+            <p className="mt-4 text-base text-muted-foreground sm:mt-6 sm:text-lg md:text-xl break-keep">
               미국 500대 기업에 한 번에 투자하는 방법.
-              <br className="hidden md:block" />
+              <br />
               ETF 비교부터 첫 매수까지, 초보자도 쉽게 따라할 수 있습니다.
             </p>
           </div>

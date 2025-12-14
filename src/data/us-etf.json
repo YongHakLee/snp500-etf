@@ -5,64 +5,64 @@
       "name": "SPDR S&P 500 ETF Trust",
       "provider": "State Street",
       "expenseRatio": 0.0945,
-      "aum": "672.7B",
-      "avgVolume": "79.53M",
+      "aum": "700.6B",
+      "avgVolume": "79.49M",
       "dividendReinvest": false,
       "targetAudience": "액티브 트레이더, 옵션 거래",
       "return5Y": 17.4,
       "return5YCumulative": 122.53,
       "inceptionDate": "1993-01-22",
-      "aumUpdated": "2025-12-05T13:04:22.086201",
-      "avgVolumeUpdated": "2025-12-05T13:04:22.086201"
+      "aumUpdated": "2025-12-14T05:00:09.798043",
+      "avgVolumeUpdated": "2025-12-14T05:00:09.798043"
     },
     {
       "ticker": "VOO",
       "name": "Vanguard S&P 500 ETF",
       "provider": "Vanguard",
       "expenseRatio": 0.03,
-      "aum": "1.4T",
-      "avgVolume": "8.09M",
+      "aum": "1.5T",
+      "avgVolume": "8.45M",
       "dividendReinvest": true,
       "targetAudience": "장기 투자자, 비용 중시",
       "return5Y": 17.6,
       "return5YCumulative": 124.78,
       "inceptionDate": "2010-09-07",
-      "aumUpdated": "2025-12-05T13:04:22.086201",
-      "avgVolumeUpdated": "2025-12-05T13:04:22.086201"
+      "aumUpdated": "2025-12-14T05:00:09.798043",
+      "avgVolumeUpdated": "2025-12-14T05:00:09.798043"
     },
     {
       "ticker": "IVV",
       "name": "iShares Core S&P 500 ETF",
       "provider": "BlackRock",
       "expenseRatio": 0.03,
-      "aum": "701.4B",
-      "avgVolume": "7.63M",
+      "aum": "732.6B",
+      "avgVolume": "7.96M",
       "dividendReinvest": false,
       "targetAudience": "장기 투자자, 기관 투자자",
       "return5Y": 17.55,
       "return5YCumulative": 124.23,
       "inceptionDate": "2000-05-15",
-      "aumUpdated": "2025-12-05T13:04:22.086201",
-      "avgVolumeUpdated": "2025-12-05T13:04:22.086201"
+      "aumUpdated": "2025-12-14T05:00:09.798043",
+      "avgVolumeUpdated": "2025-12-14T05:00:09.798043"
     },
     {
       "ticker": "SPYM",
       "name": "SPDR Portfolio S&P 500 ETF",
       "provider": "State Street",
       "expenseRatio": 0.02,
-      "aum": "86.8B",
-      "avgVolume": "9.94M",
+      "aum": "97.3B",
+      "avgVolume": "10.37M",
       "dividendReinvest": false,
       "targetAudience": "소액 투자자, 적립식 투자",
       "return5Y": 14.59,
       "return5YCumulative": 97.91,
       "inceptionDate": "2005-11-08",
-      "aumUpdated": "2025-12-05T13:04:22.086201",
-      "avgVolumeUpdated": "2025-12-05T13:04:22.086201"
+      "aumUpdated": "2025-12-14T05:00:09.798043",
+      "avgVolumeUpdated": "2025-12-14T05:00:09.798043"
     }
   ],
   "metadata": {
-    "lastUpdated": "2025-12-05T13:04:22.086201",
+    "lastUpdated": "2025-12-14T05:00:09.798043",
     "updatedBy": "yfinance_service",
     "version": "1.1.0"
   }
